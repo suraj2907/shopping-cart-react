@@ -11,7 +11,8 @@
 # production
 /build
 
-FireBaseConfig/
+# firebase auth
+.FireBaseConfig
 
 # misc
 .DS_Store
