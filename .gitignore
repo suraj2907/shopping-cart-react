@@ -11,8 +11,6 @@
 # production
 /build
 
-# firebase auth
-/FireBaseConfig.js
 
 # misc
 .env
