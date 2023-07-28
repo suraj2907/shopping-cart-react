@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { UserContext } from "../Context/UserContext";
