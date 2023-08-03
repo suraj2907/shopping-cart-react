@@ -23,7 +23,9 @@ const NavBar = () => {
   return (
     <Navbar light expand="md">
       <NavbarBrand>
-        <Link to="/" style={{textDecoration : "none"}}>Clothing WebSite</Link>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          Clothing WebSite
+        </Link>
       </NavbarBrand>
       <NavbarText>
         {context.user?.email ? <div> {context.user?.email} </div> : ""}

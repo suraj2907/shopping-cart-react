@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import axios from "axios";
+import Footer from "../Layout/Footer";
 
 const ProductItems = () => {
   const [products, setProducts] = useState([]);
@@ -62,19 +63,24 @@ const ProductItems = () => {
   };
 
   return (
-    <div>
+    <>
       <div>
-        <div className="row">
-          <div className="col-12 mb-5">
-            <h1 className="display-6 fw-bolder text-center">Latest Products</h1>
-            <hr />
+        <div>
+          <div className="row">
+            <div className="col-12 mb-5">
+              <h1 className="display-6 fw-bolder text-center">
+                Latest Products
+              </h1>
+              <hr />
+            </div>
           </div>
-        </div>
-        <div className="d-flex row justify-content-center ">
-          {<ShowProducts />}
+          <div className="d-flex row justify-content-center ">
+            {<ShowProducts />}
+          </div>
+          <Footer />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -9,6 +9,7 @@ import Home from "./Pages/Home";
 import firebase from "firebase/compat/app";
 import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
 import NavBar from "./Layout/NavBar";
+import Footer from "./Layout/Footer";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
@@ -17,9 +18,9 @@ const App = () => {
   return (
     <Router>
       <ToastContainer />
-      
+
       <UserContext.Provider value={{ user, setUser }}>
-      <NavBar />
+        <NavBar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Signup" element={<SignUp />} />
