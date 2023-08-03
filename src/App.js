@@ -8,16 +8,18 @@ import SignUp from "./Pages/SignUp";
 import Home from "./Pages/Home";
 import firebase from "firebase/compat/app";
 import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
+import NavBar from "./Layout/NavBar";
 
 firebase.initializeApp(FireBaseConfig);
-const App =()=> {
+const App = () => {
   const [user, setUser] = useState(null);
 
   return (
     <Router>
       <ToastContainer />
-
+      
       <UserContext.Provider value={{ user, setUser }}>
+      <NavBar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Signup" element={<SignUp />} />
@@ -26,6 +28,6 @@ const App =()=> {
       </UserContext.Provider>
     </Router>
   );
-}
+};
 
 export default App;
