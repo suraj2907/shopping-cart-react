@@ -13,6 +13,9 @@ import Footer from "./Layout/Footer";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
+  // const loggedIn = window.localStorage.getItem("isloggedin");
+  // console.log(loggedIn);
+
   const [user, setUser] = useState(null);
 
   return (

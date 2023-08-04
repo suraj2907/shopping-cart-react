@@ -20,6 +20,8 @@ const SignIn = () => {
       .then((res) => {
         console.log(res);
         context.setUser({ email: res.user.email, uid: res.user.uid });
+        console.log("UUID :-" ,res.user.uid);
+        
       })
       .catch((error) => {
         console.log(error);

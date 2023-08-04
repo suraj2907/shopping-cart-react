@@ -2,14 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import axios from "axios";
 import Footer from "../Layout/Footer";
+import Loading from "./Loading";
 
 const ProductItems = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchProducts = async () => {
+    setIsLoading(true);
     const { data } = await axios.get(`https://fakestoreapi.com/products`);
+
     console.log(data);
     setProducts(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -75,7 +80,7 @@ const ProductItems = () => {
             </div>
           </div>
           <div className="d-flex row justify-content-center ">
-            {<ShowProducts />}
+            {isLoading ? <Loading /> : <ShowProducts />}
           </div>
           <Footer />
         </div>

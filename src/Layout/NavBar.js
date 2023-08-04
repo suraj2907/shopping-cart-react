@@ -36,7 +36,13 @@ const NavBar = () => {
         <Nav justified className="ms-auto">
           {context.user ? (
             <NavItem>
-              <NavLink onClick={() => context.setUser(null)}>Logout</NavLink>
+              <NavLink
+                onClick={() => {
+                  context.setUser(null);
+                }}
+              >
+                Logout
+              </NavLink>
             </NavItem>
           ) : (
             <>
