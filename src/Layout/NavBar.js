@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 import {
   Collapse,
@@ -35,16 +36,22 @@ const NavBar = () => {
       <Collapse isOpen={toggle} navbar className="me-2">
         <Nav justified className="ms-auto">
           {context.user ? (
-            <NavItem>
-              <NavLink
-                onClick={() => {
-                  context.setUser(null);
-                  
-                }}
-              >
-                Logout
-              </NavLink>
-            </NavItem>
+            <>
+              <NavItem>
+                <NavLink tag={Link} to="/mycart">
+                  <FaShoppingCart /> Cart
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  onClick={() => {
+                    context.setUser(null);
+                  }}
+                >
+                  Logout
+                </NavLink>
+              </NavItem>
+            </>
           ) : (
             <>
               <NavItem>

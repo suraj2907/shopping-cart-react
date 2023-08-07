@@ -7,6 +7,7 @@ import { UserContext } from "../Context/UserContext";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 const SignIn = () => {
   const context = useContext(UserContext);
   const [email, setEmail] = useState("");
@@ -39,10 +40,10 @@ const SignIn = () => {
     const isLoggedIn = window.localStorage.getItem("isloggedin");
     if (isLoggedIn) {
       // If there's a logged-in user, update the user context
-      const userData = JSON.parse(window.localStorage.getItem("userData"))
+      const userData = JSON.parse(window.localStorage.getItem("userData"));
       context.setUser(userData); // You can set the actual user data here from localStorage
     }
-  }, []);
+  }, [context]);
 
   const handleShowPasswordToggle = () => {
     setShowPassword((prevShowPassoword) => !prevShowPassoword);

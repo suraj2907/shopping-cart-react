@@ -6,6 +6,7 @@ import Loading from "./Loading";
 
 const ProductItems = () => {
   const [products, setProducts] = useState([]);
+  const [filter, setFilter] = useState("ALL");
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchProducts = async () => {
@@ -14,6 +15,7 @@ const ProductItems = () => {
 
     console.log(data);
     setProducts(data);
+
     setIsLoading(false);
   };
 
@@ -22,23 +24,46 @@ const ProductItems = () => {
   }, []);
 
   const ShowProducts = () => {
+    const filteredProducts =
+      filter === "ALL"
+        ? products
+        : products.filter((product) => product.category === filter);
     return (
       <>
         {" "}
         <div className="buttons d-flex justify-content-center mb-4">
-          <button className="btn btn-outline-dark me-2 ">ALL</button>
-          <button className="btn btn-outline-dark me-2 ">
+          <button
+            className="btn btn-outline-dark me-2 "
+            onClick={() => setFilter("ALL")}
+          >
+            ALL
+          </button>
+          <button
+            className="btn btn-outline-dark me-2 "
+            onClick={() => setFilter("men's clothing")}
+          >
             Mens's Clothing
           </button>
-          <button className="btn btn-outline-dark me-2 ">
+          <button
+            className="btn btn-outline-dark me-2 "
+            onClick={() => setFilter("women's clothing")}
+          >
             Women's Clothing
           </button>
-          <button className="btn btn-outline-dark me-2 ">
-            Jewelery Clothing
+          <button
+            className="btn btn-outline-dark me-2 "
+            onClick={() => setFilter("jewelery")}
+          >
+            Jewelery
           </button>
-          <button className="btn btn-outline-dark me-2 ">Electronics</button>
+          <button
+            className="btn btn-outline-dark me-2 "
+            onClick={() => setFilter("electronics")}
+          >
+            Electronics
+          </button>
         </div>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="d-flex justify-content-between align-items-center my-3 me-5 col-md-3"

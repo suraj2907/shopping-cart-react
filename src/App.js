@@ -9,7 +9,7 @@ import Home from "./Pages/Home";
 import firebase from "firebase/compat/app";
 import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
 import NavBar from "./Layout/NavBar";
-import Footer from "./Layout/Footer";
+import MyCart from "./Pages/MyCart";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
@@ -25,9 +25,10 @@ const App = () => {
       <UserContext.Provider value={{ user, setUser }}>
         <NavBar />
         <Routes>
-          <Route exact path="/" element={loggedIn?<Home /> : <SignIn />} />
+          <Route exact path="/" element={loggedIn ? <Home /> : <SignIn />} />
           <Route exact path="/Signup" element={<SignUp />} />
           <Route exact path="/Signin" element={<SignIn />} />
+          <Route exact path="/Mycart" element={<MyCart />} />
         </Routes>
       </UserContext.Provider>
     </Router>
