@@ -13,8 +13,8 @@ import Footer from "./Layout/Footer";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
-  // const loggedIn = window.localStorage.getItem("isloggedin");
-  // console.log(loggedIn);
+  const loggedIn = window.localStorage.getItem("isloggedin");
+  console.log(loggedIn);
 
   const [user, setUser] = useState(null);
 
@@ -25,7 +25,7 @@ const App = () => {
       <UserContext.Provider value={{ user, setUser }}>
         <NavBar />
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={loggedIn?<Home /> : <SignIn />} />
           <Route exact path="/Signup" element={<SignUp />} />
           <Route exact path="/Signin" element={<SignIn />} />
         </Routes>

@@ -7,6 +7,10 @@ import Footer from "../Layout/Footer";
 const Home = () => {
   const Context = useContext(UserContext);
   const [user, setUser] = useState(null);
+  
+
+
+
 
   if (!Context.user?.uid) {
     return <Navigate to="/signin" />;

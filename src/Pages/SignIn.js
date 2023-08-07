@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
@@ -19,9 +19,11 @@ const SignIn = () => {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         console.log(res);
-        context.setUser({ email: res.user.email, uid: res.user.uid });
-        console.log("UUID :-" ,res.user.uid);
-        
+        const userData = { email: res.user.email, uid: res.user.uid };
+        context.setUser(userData);
+        console.log("UUID:-", res.user.uid);
+        window.localStorage.setItem("userData", JSON.stringify(userData));
+        window.localStorage.setItem("isloggedin", true);
       })
       .catch((error) => {
         console.log(error);
@@ -33,6 +35,14 @@ const SignIn = () => {
     e.preventDefault();
     handleSignIn();
   };
+  useEffect(() => {
+    const isLoggedIn = window.localStorage.getItem("isloggedin");
+    if (isLoggedIn) {
+      // If there's a logged-in user, update the user context
+      const userData = JSON.parse(window.localStorage.getItem("userData"))
+      context.setUser(userData); // You can set the actual user data here from localStorage
+    }
+  }, []);
 
   const handleShowPasswordToggle = () => {
     setShowPassword((prevShowPassoword) => !prevShowPassoword);

@@ -39,6 +39,7 @@ const NavBar = () => {
               <NavLink
                 onClick={() => {
                   context.setUser(null);
+                  
                 }}
               >
                 Logout
