@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../Context/UserContext";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../Layout/Footer";
-import Loading from "./Loading";
+import Skeleton from "react-loading-skeleton";
+import { NavLink } from "react-router-dom";
 
 const ProductItems = () => {
   const [products, setProducts] = useState([]);
@@ -64,26 +64,30 @@ const ProductItems = () => {
           </button>
         </div>
         {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            className="d-flex justify-content-between align-items-center my-3 me-5 col-md-3"
-          >
+          <div className=" col-md-3 mb-4">
             <div
-              class="card h-100 p-3 outline  text-center"
-              style={{ width: "max-content" }}
+              class="card h-100 ms-5 p-4 d-flex justify-content-center outline text-center"
+              key={product.id}
+              style={{ width: "300px" }}
             >
               <img
+                height="250px"
                 class="card-img-top"
                 src={product.image}
                 alt={product.title}
               />
               <div class="card-body">
                 <h5 class="card-title"> {product.title}</h5>
-                <p class="card-text">{product.description}</p>
-                <p class="card-text">${product.price}</p>
-                <a href="#" class="btn btn-primary">
+                <p class="card-text">{product.description.substring(0, 100)}</p>
+                <p class="card-text" style={{ fontWeight: "bold" }}>
+                  ${product.price}
+                </p>
+                <NavLink
+                  to={`/ProductDetails/${product.id}`}
+                  class="btn btn-primary"
+                >
                   Buy Now
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -105,7 +109,24 @@ const ProductItems = () => {
             </div>
           </div>
           <div className="d-flex row justify-content-center ">
-            {isLoading ? <Loading /> : <ShowProducts />}
+            {isLoading ? (
+              <>
+                <div className="col-md-3">
+                  <Skeleton height={350} />
+                </div>
+                <div className="col-md-3">
+                  <Skeleton height={350} />
+                </div>
+                <div className="col-md-3">
+                  <Skeleton height={350} />
+                </div>
+                <div className="col-md-3">
+                  <Skeleton height={350} />
+                </div>
+              </>
+            ) : (
+              <ShowProducts />
+            )}
           </div>
           <Footer />
         </div>

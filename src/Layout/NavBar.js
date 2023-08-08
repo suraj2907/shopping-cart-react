@@ -38,7 +38,7 @@ const NavBar = () => {
           {context.user ? (
             <>
               <NavItem>
-                <NavLink tag={Link} to="/mycart">
+                <NavLink tag={Link} to="/MyCart">
                   <FaShoppingCart /> Cart
                 </NavLink>
               </NavItem>

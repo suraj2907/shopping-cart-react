@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { UserContext } from "./Context/UserContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Home from "./Pages/Home";
@@ -10,13 +10,29 @@ import firebase from "firebase/compat/app";
 import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
 import NavBar from "./Layout/NavBar";
 import MyCart from "./Pages/MyCart";
+import ProductDetails from "./Pages/ProductDetails";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
-  const loggedIn = window.localStorage.getItem("isloggedin");
-  console.log(loggedIn);
-
   const [user, setUser] = useState(null);
+
+  // const loggedIn = window.localStorage.getItem("isloggedin");
+  // console.log(loggedIn);
+  useEffect(() => {
+    // Set up auth state change listener
+    const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      // Unsubscribe the listener when component unmounts
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <Router>
@@ -25,10 +41,15 @@ const App = () => {
       <UserContext.Provider value={{ user, setUser }}>
         <NavBar />
         <Routes>
-          <Route exact path="/" element={loggedIn ? <Home /> : <SignIn />} />
+          <Route exact path="/" element={<Home />} />
           <Route exact path="/Signup" element={<SignUp />} />
           <Route exact path="/Signin" element={<SignIn />} />
-          <Route exact path="/Mycart" element={<MyCart />} />
+          <Route
+            exact
+            path="/ProductDetails/:id"
+            element={<ProductDetails />}
+          />
+          <Route exact path="/MyCart" element={<MyCart />} />
         </Routes>
       </UserContext.Provider>
     </Router>
