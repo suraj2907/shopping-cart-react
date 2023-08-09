@@ -11,6 +11,7 @@ import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
 import NavBar from "./Layout/NavBar";
 import MyCart from "./Pages/MyCart";
 import ProductDetails from "./Pages/ProductDetails";
+import Checkout from "./Pages/Checkout";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
             element={<ProductDetails />}
           />
           <Route exact path="/MyCart" element={<MyCart />} />
+          <Route exact path="/Checkout" element={<Checkout />} />
         </Routes>
       </UserContext.Provider>
     </Router>

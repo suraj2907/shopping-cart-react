@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../Redux/action/action";
+import { NavLink } from "react-router-dom";
 
 const MyCart = () => {
   const state = useSelector((state) => state.handleCart);
@@ -52,9 +53,20 @@ const MyCart = () => {
     );
   };
 
-  const button =() => {
-    
-  }
+  const button = () => {
+    return (
+      <div className="container ">
+        <div className="row">
+          <NavLink
+            to="/checkout"
+            className="btn mb-5 btn-outline-primary w-25 mx-auto"
+          >
+            Checkout
+          </NavLink>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
