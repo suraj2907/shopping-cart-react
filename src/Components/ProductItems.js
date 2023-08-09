@@ -9,17 +9,17 @@ const ProductItems = () => {
   const [filter, setFilter] = useState("ALL");
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchProducts = async () => {
-    setIsLoading(true);
-    const { data } = await axios.get(`https://fakestoreapi.com/products`);
-
-    console.log(data);
-    setProducts(data);
-
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      const { data } = await axios.get(`https://fakestoreapi.com/products`);
+
+      console.log(data);
+      setProducts(data);
+
+      setIsLoading(false);
+    };
+
     fetchProducts();
   }, []);
 
@@ -31,7 +31,7 @@ const ProductItems = () => {
     return (
       <>
         {" "}
-        <div className="buttons d-flex justify-content-center mb-4">
+        <div className="buttons d-flex justify-content-center me-3 ms-3  mb-4" style={{overflow : "hidden"}}>
           <button
             className="btn btn-outline-dark me-2 "
             onClick={() => setFilter("ALL")}
@@ -64,7 +64,7 @@ const ProductItems = () => {
           </button>
         </div>
         {filteredProducts.map((product) => (
-          <div className=" col-md-3 mb-4">
+          <div className=" col-md-3 col-sm-6 mb-4">
             <div
               class="card h-100 ms-5 p-4 d-flex justify-content-center outline text-center"
               key={product.id}
@@ -101,7 +101,7 @@ const ProductItems = () => {
       <div>
         <div>
           <div className="row">
-            <div className="col-12 mb-5">
+            <div className="col-12  mb-5">
               <h1 className="display-6 fw-bolder text-center">
                 Latest Products
               </h1>

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { FaShoppingCart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 import {
   Collapse,
@@ -15,6 +16,7 @@ import {
 } from "reactstrap";
 
 const NavBar = () => {
+  const state = useSelector((state) => state.handleCart);
   const context = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
 
@@ -38,8 +40,14 @@ const NavBar = () => {
           {context.user ? (
             <>
               <NavItem>
-                <NavLink tag={Link} to="/MyCart">
-                  <FaShoppingCart /> Cart
+                <NavLink
+                  tag={Link}
+                  to="/MyCart"
+                  style={{
+                    width: "max-content",
+                  }}
+                >
+                  <FaShoppingCart /> Cart ({state.length})
                 </NavLink>
               </NavItem>
               <NavItem>

@@ -7,17 +7,15 @@ import Footer from "../Layout/Footer";
 const Home = () => {
   const Context = useContext(UserContext);
   const [user, setUser] = useState(null);
-  
-
-
-
 
   if (!Context.user?.uid) {
     return <Navigate to="/signin" />;
   }
   return (
     <>
-      <ProductItems />
+      <div className="col-12">
+        <ProductItems />
+      </div>
     </>
   );
 };

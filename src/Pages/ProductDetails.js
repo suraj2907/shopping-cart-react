@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Redux/action/action";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
@@ -9,6 +11,11 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [isloading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const addProduct = (product) => {
+    dispatch(addToCart(product));
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,7 +34,7 @@ const ProductDetails = () => {
 
   const ShowProducts = () => (
     <div className="d-flex row">
-      <div className="col-md-6 mt-5" key={product.id}>
+      <div className="col-md-6 col-sm-3 mt-5" key={product.id}>
         <img
           src={product.image}
           alt={product.title}
@@ -44,7 +51,9 @@ const ProductDetails = () => {
         </p>
         <h3 className="display-6 fw-bolder my-4">${product.price}</h3>
         <p className="lead">{product.description}</p>
-        <button className="btn btn-primary">Add to Cart</button>
+        <button className="btn btn-primary" onClick={() => addProduct(product)}>
+          Add to Cart
+        </button>
         <NavLink to="/MyCart" className="btn btn-outline-dark ms-2">
           Go to Cart
         </NavLink>
