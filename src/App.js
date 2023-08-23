@@ -11,6 +11,7 @@ import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
 import NavBar from "./Layout/NavBar";
 import MyCart from "./Pages/MyCart";
 import ProductDetails from "./Pages/ProductDetails";
+import Checkout from "./Pages/Checkout";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
   useEffect(() => {
     // Set up auth state change listener
     setIsLoading(true);
-    
+
     const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         setUser(authUser);
@@ -39,7 +40,7 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
+    <>
       <ToastContainer />
 
       <UserContext.Provider value={{ user, setUser }}>
@@ -54,9 +55,10 @@ const App = () => {
             element={<ProductDetails />}
           />
           <Route exact path="/MyCart" element={<MyCart />} />
+          <Route exact path="/checkout" element={<Checkout />} />
         </Routes>
       </UserContext.Provider>
-    </Router>
+    </>
   );
 };
 

@@ -11,25 +11,9 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [isloading, setIsLoading] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // Get the current cart items from local storage
-    if (product) {
-      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-      // Add the new product to the cart items array
-      cartItems.push(product);
-
-      // Store the updated cart items back in local storage
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    }
-  }, [product]);
-
-  const addProductToCart = (product) => {
-    dispatch(addToCart(product));
-  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -45,6 +29,18 @@ const ProductDetails = () => {
 
     fetchProduct();
   }, [id]);
+
+  const addProductToCart = (product) => {
+    //setCartItems([...cartItems, product]);
+    dispatch(addToCart(product));
+    const updatedCart = [...cartItems, product];
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  };
+
+  useEffect(() => {
+    // Update local storage whenever cart items change
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const ShowProducts = () => (
     <div className="d-flex row" key={product.id}>

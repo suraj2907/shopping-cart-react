@@ -1,24 +1,29 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../Redux/action/action";
+import { removeFromCart, addToCart } from "../Redux/action/action";
 import { NavLink } from "react-router-dom";
 
 const MyCart = () => {
-  const cartItems = useSelector((state) => state.handleCart);
+  const cartItems = useSelector((state) => state.handleCart.cartItems);
   const dispatch = useDispatch();
   useEffect(() => {
     // Retrieve the cart items from local storage
     const cartItemsJSON = localStorage.getItem("cartItems");
-    const cartItems = cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
 
-    // Dispatch an action to set the cart data in Redux
-    cartItems.forEach((item) => {
-      dispatch(addToCart(item));
-    });
+    if (Array.isArray(cartItemsJSON)) {
+      // Parse the data and dispatch it to Redux
+      const parsedCartItems = JSON.parse(cartItemsJSON);
+      parsedCartItems.forEach((item) => {
+        dispatch(addToCart(item));
+      });
+    }
   }, [dispatch]);
 
   const handleClose = (item) => {
     dispatch(removeFromCart(item));
+      // Get the current cart items from local storage
+      const updatedCart = cartItems.filter((cartItem) => cartItem.id !== item.id);
+      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
   const cartItemElements = cartItems.map((cartItem) => {
@@ -63,9 +68,20 @@ const MyCart = () => {
     );
   };
 
-  const button =() => {
-    
-  }
+  const button = () => {
+    return (
+      <div className="container ">
+        <div className="row">
+          <NavLink
+            to="/checkout"
+            className="btn mb-5 btn-outline-primary w-25 mx-auto"
+          >
+            Checkout
+          </NavLink>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
