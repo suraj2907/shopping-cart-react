@@ -16,7 +16,7 @@ import {
 } from "reactstrap";
 
 const NavBar = () => {
-  const state = useSelector((state) => state.handleCart.cartItems);
+  const state = useSelector((state) => state.handleCart);
   const context = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
 

@@ -3,20 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/action/action";
 
 const Checkout = () => {
-  const cartItems = useSelector((state) => state.handleCart.cartItems) ?? [];
+  const cartItems = useSelector((state) => state.handleCart);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const cartItemsJSON = JSON.parse(localStorage.getItem("cartItems")) || [];
-  
-    if (Array.isArray(cartItemsJSON)) {
-      cartItemsJSON.forEach((item) => {
-        dispatch(addToCart(item));
-      });
-    } else {
-      console.error("Data from local storage is not an array:", cartItemsJSON);
-    }
-  }, [dispatch]);
 
   var total = 0;
   total = cartItems.reduce((acc, item) => {
@@ -38,8 +26,8 @@ const Checkout = () => {
       </li>
     );
   });
-  console.log("CartItems:", cartItems);
-  console.log("Total:", total);
+  // console.log("CartItems:", cartItems);
+  // console.log("Total:", total);
 
   return (
     <div className="container">

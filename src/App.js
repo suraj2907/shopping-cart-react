@@ -55,6 +55,7 @@ const App = () => {
             element={<ProductDetails />}
           />
           <Route exact path="/MyCart" element={<MyCart />} />
+          <Route exact path="/checkout" element={<Checkout />} />
         </Routes>
       </UserContext.Provider>
     </>

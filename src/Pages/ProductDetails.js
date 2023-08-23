@@ -15,6 +15,23 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
 
+  const addProduct = (product) => {
+    dispatch(addToCart(product));
+    const updatedCart = [...cartItems, product];
+    setCartItems(updatedCart);
+    
+  };
+   // Load cart items from local storage on component mount
+   useEffect(() => {
+    const cartItemsFromStorage = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(cartItemsFromStorage);
+  }, []);
+
+  // Update local storage whenever cart items change
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   useEffect(() => {
     const fetchProduct = async () => {
       setIsLoading(true);
@@ -29,18 +46,6 @@ const ProductDetails = () => {
 
     fetchProduct();
   }, [id]);
-
-  const addProductToCart = (product) => {
-    //setCartItems([...cartItems, product]);
-    dispatch(addToCart(product));
-    const updatedCart = [...cartItems, product];
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-  };
-
-  useEffect(() => {
-    // Update local storage whenever cart items change
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
 
   const ShowProducts = () => (
     <div className="d-flex row" key={product.id}>
@@ -61,10 +66,7 @@ const ProductDetails = () => {
         </p>
         <h3 className="display-6 fw-bolder my-4">${product.price}</h3>
         <p className="lead">{product.description}</p>
-        <button
-          className="btn btn-primary"
-          onClick={() => addProductToCart(product)}
-        >
+        <button className="btn btn-primary" onClick={() => addProduct(product)}>
           Add to Cart
         </button>
         <NavLink to="/MyCart" className="btn btn-outline-dark ms-2">
