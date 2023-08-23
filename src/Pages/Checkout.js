@@ -1,21 +1,41 @@
-import React from "react";
-import { UseSelector, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Redux/action/action";
 
 const Checkout = () => {
-  const state = useSelector((state) => state.handleCart);
-  var total = 0;
-  const cartItems = (item) => {
-    total = total + item.price;
+  const cartItems = useSelector((state) => state.handleCart);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    // Dispatch an action to set the cart data in Redux
+    storedCart.forEach((item) => {
+      dispatch(addToCart(item));
+    });
+  }, [dispatch]);
+  let total = 0;
+  let totalQty = 0;
+
+  const cartItemElements = cartItems.map((item) => {
+    for (const item of cartItems) {
+      const itemTotal = item.qty * item.price;
+      total += itemTotal;
+      totalQty += item.qty;
+    }
     return (
-      <li className="list-group-item d-flex justify-content-between lh-condensed">
+      <li
+        className="list-group-item d-flex justify-content-between lh-condensed"
+        key={item.id}
+      >
         <div>
           <h6 className="my-0">{item.title}</h6>
         </div>
-        <span className="text-muted">${item.price}</span>
+        <span className="lead fw-bold">
+          {totalQty} X ${item.price} = $ {total.toFixed(2)}
+        </span>
       </li>
     );
-  };
+  });
 
   return (
     <div className="container">
@@ -25,15 +45,15 @@ const Checkout = () => {
             <span className="text-muted">Your cart</span>
             <span className="badge bg-warning rounded-pill">
               {" "}
-              {state.length}{" "}
+              {cartItems.length}{" "}
             </span>
           </h4>
           <ul className="list-group mb-3">
-            {state.map(cartItems)}
+            {cartItemElements}
 
             <li className="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>${total}</strong>
+              <strong>${total.toFixed(2)}</strong>
             </li>
           </ul>
 

@@ -7,7 +7,9 @@ const handleCart = (state = cart, action) => {
 
   switch (action.type) {
     case ADD_TO_CART:
+     
       const existingProduct = state.find((item) => item.id === product.id);
+      console.log(existingProduct);
       if (existingProduct) {
         return state.map((item) =>
           item.id === product.id ? { ...item, qty: item.qty + 1 } : item

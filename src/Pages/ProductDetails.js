@@ -13,7 +13,21 @@ const ProductDetails = () => {
   const [isloading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const addProduct = (product) => {
+
+  useEffect(() => {
+    // Get the current cart items from local storage
+    if (product) {
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+      // Add the new product to the cart items array
+      cartItems.push(product);
+
+      // Store the updated cart items back in local storage
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  }, [product]);
+
+  const addProductToCart = (product) => {
     dispatch(addToCart(product));
   };
 
@@ -33,8 +47,8 @@ const ProductDetails = () => {
   }, [id]);
 
   const ShowProducts = () => (
-    <div className="d-flex row">
-      <div className="col-md-6 col-sm-3 mt-5" key={product.id}>
+    <div className="d-flex row" key={product.id}>
+      <div className="col-md-6 col-sm-3 mt-5">
         <img
           src={product.image}
           alt={product.title}
@@ -51,7 +65,10 @@ const ProductDetails = () => {
         </p>
         <h3 className="display-6 fw-bolder my-4">${product.price}</h3>
         <p className="lead">{product.description}</p>
-        <button className="btn btn-primary" onClick={() => addProduct(product)}>
+        <button
+          className="btn btn-primary"
+          onClick={() => addProductToCart(product)}
+        >
           Add to Cart
         </button>
         <NavLink to="/MyCart" className="btn btn-outline-dark ms-2">
