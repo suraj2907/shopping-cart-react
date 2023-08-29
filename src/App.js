@@ -18,10 +18,9 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const loggedIn = window.localStorage.getItem("isloggedin");
-  // console.log(loggedIn);
+  
   useEffect(() => {
-    // Set up auth state change listener
+    
     setIsLoading(true);
 
     const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {

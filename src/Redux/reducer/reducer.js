@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../action/action-type";
 
-const cart = [];
+const cart = JSON.parse(localStorage.getItem("CartItems")) || [];
 
 const handleCart = (state = cart, action) => {
   const product = action.payload;
@@ -17,13 +18,13 @@ const handleCart = (state = cart, action) => {
         const product = action.payload;
         return [
           ...state,
+
           {
             ...product,
             qty: 1,
           },
         ];
       }
-      
 
     case REMOVE_FROM_CART:
       const existingProductToRemove = state.find(
@@ -32,8 +33,10 @@ const handleCart = (state = cart, action) => {
       if (existingProductToRemove.qty === 1) {
         return state.filter((item) => item.id !== product.id);
       } else {
-        return state.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty - 1 } : item
+        return state.map(
+          (item) =>
+            item.id === product.id ? { ...item, qty: item.qty - 1 } : item,
+          localStorage.setItem("CartItems", JSON.stringify(state.cart))
         );
       }
 

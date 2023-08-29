@@ -7,33 +7,44 @@ const MyCart = () => {
   const cartItem = useSelector((state) => state.handleCart);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const cartJSON = localStorage.getItem("CartItems");
+    if (cartJSON) {
+      const cartArray = JSON.parse(cartJSON);
+      // Dispatch addToCart action to populate the Redux store with items from local storage
+      cartArray.forEach((item) => {
+        dispatch(addToCart(item));
+      });
+    }
+  }, [dispatch]);
+
   const handleClose = (item) => {
     dispatch(removeFromCart(item));
   };
 
-  const cartItems = (cartItem) => {
+  const cartItems = (item) => {
     return (
-      <div className="px-4 my-5 bg-light rounded-3" key={cartItem.id}>
+      <div className="px-4 my-5 bg-light rounded-3" key={item.id}>
         <div className="container py-4">
           <button
             className="btn-close float-end"
             aria-label="Close"
-            onClick={() => handleClose(cartItem)}
+            onClick={() => handleClose(item)}
           ></button>
 
           <div className="d-flex row justify-content-center">
             <div className="col-md-4">
               <img
-                src={cartItem.image}
-                alt={cartItem.title}
+                src={item.image}
+                alt={item.title}
                 height="200px"
                 width="180px"
               />
             </div>
             <div className="col-md-4 ">
-              <h3> {cartItem.title} </h3>
-              <p className="lead"> {cartItem.description} </p>
-              <p className="lead fw-bolder">${cartItem.price}</p>
+              <h3> {item.title} </h3>
+              <p className="lead"> {item.description} </p>
+              <p className="lead fw-bolder">${item.price}</p>
             </div>
           </div>
         </div>
@@ -53,7 +64,7 @@ const MyCart = () => {
     );
   };
 
-  const button = () => {
+  const checkoutButton = () => {
     return (
       <div className="container ">
         <div className="row">
@@ -73,7 +84,7 @@ const MyCart = () => {
       {cartItem.length === 0 && emptyCart()}
 
       {cartItem.length !== 0 && cartItem.map(cartItems)}
-      {cartItem.length !== 0 && button()}
+      {cartItem.length !== 0 && checkoutButton()}
     </>
   );
 };

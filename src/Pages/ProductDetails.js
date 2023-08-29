@@ -3,49 +3,49 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/action/action";
+import { useSelector } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 
+const cartItemsFromStorage =
+  JSON.parse(localStorage.getItem("CartItems")) || [];
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const cartItems = useSelector((state) => state.handleCart);
   const [isloading, setIsLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [product, setProduct] = useState(cartItemsFromStorage);
 
   const dispatch = useDispatch();
 
-  const addProduct = (product) => {
-    dispatch(addToCart(product));
-    const updatedCart = [...cartItems, product];
-    setCartItems(updatedCart);
-    
-  };
-   // Load cart items from local storage on component mount
-   useEffect(() => {
-    const cartItemsFromStorage = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(cartItemsFromStorage);
-  }, []);
-
-  // Update local storage whenever cart items change
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
   useEffect(() => {
     const fetchProduct = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get(
-        `https://fakestoreapi.com/products/${id}`
-      );
-      console.log(data);
-      setProduct(data);
-
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(
+          `https://fakestoreapi.com/products/${id}`
+        );
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchProduct();
   }, [id]);
+
+  const addProduct = (product) => {
+    const existingCartItemsJSON = localStorage.getItem("CartItems");
+    const existingCartItems = existingCartItemsJSON
+      ? JSON.parse(existingCartItemsJSON)
+      : [];
+
+    const updatedProduct = [...existingCartItems, product];
+    dispatch(addToCart(product));
+    localStorage.setItem("CartItems", JSON.stringify(updatedProduct));
+  };
 
   const ShowProducts = () => (
     <div className="d-flex row" key={product.id}>

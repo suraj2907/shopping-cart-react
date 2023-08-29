@@ -16,7 +16,7 @@ import {
 } from "reactstrap";
 
 const NavBar = () => {
-  const state = useSelector((state) => state.handleCart);
+  const cartItems = useSelector((state) => state.handleCart);
   const context = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
 
@@ -47,7 +47,7 @@ const NavBar = () => {
                     width: "max-content",
                   }}
                 >
-                  <FaShoppingCart /> Cart ({state.length})
+                  <FaShoppingCart /> Cart ({cartItems.length})
                 </NavLink>
               </NavItem>
               <NavItem>
