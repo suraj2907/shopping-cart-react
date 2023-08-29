@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { UserContext } from "./Context/UserContext";
 import { useState, useEffect } from "react";
@@ -18,12 +18,11 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  
   useEffect(() => {
-    
     setIsLoading(true);
 
     const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+      setIsLoading(true);
       if (authUser) {
         setUser(authUser);
       } else {
@@ -38,10 +37,12 @@ const App = () => {
     };
   }, []);
 
-  return (
+  return isLoading ? (
+    <div>...Loading</div>
+  ) : (
     <>
+      {" "}
       <ToastContainer />
-
       <UserContext.Provider value={{ user, setUser }}>
         <NavBar />
         <Routes>

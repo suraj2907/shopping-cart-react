@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../action/action-type";
 
 const cart = JSON.parse(localStorage.getItem("CartItems")) || [];

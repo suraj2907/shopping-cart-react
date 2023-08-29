@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../Redux/action/action";
+import React  from "react";
+import {  useSelector } from "react-redux";
+//import { addToCart } from "../Redux/action/action";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.handleCart);
-  const dispatch = useDispatch();
+
 
   var total = 0;
   total = cartItems.reduce((acc, item) => {

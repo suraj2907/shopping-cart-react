@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/action/action";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
@@ -12,7 +12,7 @@ const cartItemsFromStorage =
   JSON.parse(localStorage.getItem("CartItems")) || [];
 const ProductDetails = () => {
   const { id } = useParams();
-  const cartItems = useSelector((state) => state.handleCart);
+  //const cartItems = useSelector((state) => state.handleCart);
   const [isloading, setIsLoading] = useState(false);
   const [product, setProduct] = useState(cartItemsFromStorage);
 
