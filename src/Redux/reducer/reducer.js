@@ -1,20 +1,25 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../action/action-type";
+import {
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  UPDATE_CART_FROM_CACHE,
+} from "../action/action-type";
 
-const cart = JSON.parse(localStorage.getItem("CartItems")) || [];
+const cart = [];
 
 const handleCart = (state = cart, action) => {
   const product = action.payload;
-
   switch (action.type) {
     case ADD_TO_CART:
-      const existingProduct = state.find((item) => item.id === product.id);
+      const existingProductIndex = state.findIndex(
+        (item) => item.id === product.id
+      );
 
-      if (existingProduct) {
-        return state.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
-        );
+      if (existingProductIndex !== -1) {
+        // If the product already exists in the cart, increment its quantity
+        const updatedCart = [...state];
+        updatedCart[existingProductIndex].qty += 1;
+        return updatedCart;
       } else {
-        const product = action.payload;
         return [
           ...state,
 
@@ -24,23 +29,38 @@ const handleCart = (state = cart, action) => {
           },
         ];
       }
+      break;
 
     case REMOVE_FROM_CART:
       const existingProductToRemove = state.find(
         (item) => item.id === product.id
       );
+
       if (existingProductToRemove.qty === 1) {
-        return state.filter((item) => item.id !== product.id);
+        // Remove the item from the cart if qty is 1
+        const updatedCart = state.filter((item) => item.id !== product.id);
+        localStorage.setItem("CartItems", JSON.stringify(updatedCart));
+        return updatedCart;
       } else {
-        return state.map(
-          (item) =>
-            item.id === product.id ? { ...item, qty: item.qty - 1 } : item,
-          localStorage.setItem("CartItems", JSON.stringify(state.cart))
+        // Decrement the quantity when qty is greater than 1
+        const updatedCart = state.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty - 1 } : item
         );
+        localStorage.setItem("CartItems", JSON.stringify(updatedCart));
+        return updatedCart;
       }
+      break;
+
+    case UPDATE_CART_FROM_CACHE:
+      const cartItems = action.payload.map((item) => ({
+        ...item,
+        qty: item.qty,
+      }));
+      return cartItems;
 
     default:
       return state;
+      break;
   }
 };
 

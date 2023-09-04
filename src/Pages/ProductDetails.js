@@ -3,18 +3,16 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/action/action";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 
-const cartItemsFromStorage =
-  JSON.parse(localStorage.getItem("CartItems")) || [];
 const ProductDetails = () => {
   const { id } = useParams();
-  //const cartItems = useSelector((state) => state.handleCart);
-  const [isloading, setIsLoading] = useState(false);
-  const [product, setProduct] = useState(cartItemsFromStorage);
+  const cartItems = useSelector((state) => state.handleCart);
+  const [isLoading, setIsLoading] = useState(true);
+  const [product, setProduct] = useState({});
 
   const dispatch = useDispatch();
 
@@ -26,6 +24,7 @@ const ProductDetails = () => {
           `https://fakestoreapi.com/products/${id}`
         );
         setProduct(data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -37,15 +36,51 @@ const ProductDetails = () => {
   }, [id]);
 
   const addProduct = (product) => {
-    const existingCartItemsJSON = localStorage.getItem("CartItems");
-    const existingCartItems = existingCartItemsJSON
-      ? JSON.parse(existingCartItemsJSON)
-      : [];
+    if (product) {
+      dispatch(addToCart(product));
 
-    const updatedProduct = [...existingCartItems, product];
-    dispatch(addToCart(product));
-    localStorage.setItem("CartItems", JSON.stringify(updatedProduct));
+      // Retrieve existing cart items from localStorage
+      const existingCartItemsJSON = localStorage.getItem("CartItems");
+      const existingCartItems = existingCartItemsJSON
+        ? JSON.parse(existingCartItemsJSON)
+        : [];
+
+      // Find the index of the existing product in cart items
+      const existingProductIndex = existingCartItems.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingProductIndex !== -1) {
+        // If the product already exists in the cart, update its quantity
+        existingCartItems[existingProductIndex].qty++;
+      } else {
+        // If the product doesn't exist, add it with a quantity of 1
+        existingCartItems.push({ ...product, qty: 1 });
+      }
+
+      // Store the updated cart items back in localStorage
+      localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
+    } else {
+      console.error("Invalid product:", product);
+    }
   };
+
+  useEffect(() => {
+    const cartJSON = localStorage.getItem("CartItems");
+    if (cartJSON) {
+      const cartArray = JSON.parse(cartJSON);
+
+      // Ensure cartArray is always an array
+      if (!Array.isArray(cartArray)) {
+        console.error("Invalid cartArray:", cartArray);
+        return;
+      }
+      //Dispatch addToCart action to populate the Redux store with items from local storage
+      cartArray.forEach((item) => {
+        dispatch(addToCart(item));
+      });
+    }
+  }, [dispatch]);
 
   const ShowProducts = () => (
     <div className="d-flex row" key={product.id}>
@@ -80,7 +115,7 @@ const ProductDetails = () => {
     <>
       <div className="container py-5">
         <div className="row">
-          {isloading ? (
+          {isLoading ? (
             <>
               {" "}
               <div className="col-md-6">
@@ -97,7 +132,7 @@ const ProductDetails = () => {
               </div>
             </>
           ) : (
-            <ShowProducts />
+            product && <ShowProducts />
           )}
         </div>
       </div>
