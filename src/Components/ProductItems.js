@@ -31,10 +31,7 @@ const ProductItems = () => {
     return (
       <>
         {" "}
-        <div
-          className="buttons d-flex justify-content-center me-3 ms-3  mb-4"
-          style={{ overflow: "hidden" }}
-        >
+        <div className="buttons d-flex justify-content-center flex-wrap text-center me-3 ms-3  mb-4">
           <button
             className="btn btn-outline-dark me-2 "
             onClick={() => setFilter("ALL")}
@@ -66,35 +63,37 @@ const ProductItems = () => {
             Electronics
           </button>
         </div>
-        {filteredProducts.map((item) => (
-          <div className=" col-md-3 col-sm-6 mb-4">
-            <div
-              class="card h-100 ms-5 p-4 d-flex justify-content-center outline text-center"
-              key={item.id}
-              style={{ width: "300px" }}
-            >
-              <img
-                height="250px"
-                class="card-img-top"
-                src={item.image}
-                alt={item.title}
-              />
-              <div class="card-body">
-                <h5 class="card-title"> {item.title}</h5>
-                <p class="card-text">{item.description.substring(0, 100)}</p>
-                <p class="card-text" style={{ fontWeight: "bold" }}>
-                  ${item.price}
-                </p>
-                <NavLink
-                  to={`/ProductDetails/${item.id}`}
-                  class="btn btn-primary"
-                >
-                  Buy Now
-                </NavLink>
+        <div className="d-flex flex-wrap justify-content-center">
+          {filteredProducts.map((item) => (
+            <div className=" d-flex  flex-wrap col-md-3 col-sm-6 mb-4">
+              <div
+                class="card h-100 ms-5 p-4 d-flex justify-content-center outline text-center"
+                key={item.id}
+                style={{ width: "300px" }}
+              >
+                <img
+                  height="250px"
+                  class="card-img-top"
+                  src={item.image}
+                  alt={item.title}
+                />
+                <div class="card-body">
+                  <h5 class="card-title overflow-hidden"> {item.title}</h5>
+                  <p class="card-text">{item.description.substring(0, 100)}</p>
+                  <p class="card-text" style={{ fontWeight: "bold" }}>
+                    ${item.price}
+                  </p>
+                  <NavLink
+                    to={`/ProductDetails/${item.id}`}
+                    class="btn btn-primary"
+                  >
+                    Buy Now
+                  </NavLink>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </>
     );
   };
@@ -105,7 +104,7 @@ const ProductItems = () => {
         <div>
           <div className="row">
             <div className="col-12  mb-5">
-              <h1 className="display-6 fw-bolder text-center">
+              <h1 className="display-6 overflow-hidden fw-bolder text-center">
                 Latest Products
               </h1>
               <hr />

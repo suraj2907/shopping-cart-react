@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addToCart,
+  //addToCart,
   removeFromCart,
   updateCartItemsFromCache,
 } from "../Redux/action/action";
@@ -45,55 +45,6 @@ const MyCart = () => {
     }
   };
 
-  const handleIncrement = (item) => {
-    // Dispatch the addToCart action to increment quantity in Redux store
-    dispatch(addToCart(item));
-
-    // Update the quantity in local storage
-    const existingCartItemsJSON = localStorage.getItem("CartItems");
-    const existingCartItems = existingCartItemsJSON
-      ? JSON.parse(existingCartItemsJSON)
-      : [];
-
-    const itemIndexToUpdate = existingCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (itemIndexToUpdate !== -1) {
-      existingCartItems[itemIndexToUpdate].qty++;
-      localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-    }
-  };
-
-  const handleDecrement = (item) => {
-    // Dispatch the removeFromCart action to decrement quantity in Redux store
-    dispatch(removeFromCart(item));
-
-    // Update the quantity in local storage
-    const existingCartItemsJSON = localStorage.getItem("CartItems");
-    const existingCartItems = existingCartItemsJSON
-      ? JSON.parse(existingCartItemsJSON)
-      : [];
-
-    const itemIndexToUpdate = existingCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (
-      itemIndexToUpdate !== -1 &&
-      existingCartItems[itemIndexToUpdate].qty > 1
-    ) {
-      existingCartItems[itemIndexToUpdate].qty--;
-    } else if (itemIndexToUpdate !== -1) {
-      // If the quantity is 1, remove the item from local storage
-
-      existingCartItems.splice(itemIndexToUpdate, 1);
-      localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-    }
-
-    localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-  };
-
   const cartItems = (item) => {
     return (
       <div className="px-4 my-5 bg-light rounded-3" key={item.id}>
@@ -114,12 +65,11 @@ const MyCart = () => {
               />
             </div>
             <div className="col-md-4 ">
-              <h3> {item.title} </h3>
+              <h3 className="overflow-hidden"> {item.title} </h3>
               <p className="lead"> {item.description} </p>
               <p className="lead fw-bolder">${item.price}</p>
-              <button onClick={() => handleIncrement(item)}>+</button>
+
               <p>{item.qty}</p>
-              <button onClick={() => handleDecrement(item)}>-</button>
             </div>
           </div>
         </div>
@@ -132,7 +82,7 @@ const MyCart = () => {
       <div className="my-4 px-3 bg-light rounded-3 ">
         <div className="container py-4 ">
           <div className="row">
-            <h3>Your Cart is Empty</h3>
+            <h3 className=" overflow-hidden">Your Cart is Empty</h3>
           </div>
         </div>
       </div>

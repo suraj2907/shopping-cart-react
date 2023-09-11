@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/action/action";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const cartItems = useSelector((state) => state.handleCart);
+  //const cartItems = useSelector((state) => state.handleCart);
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
 
@@ -82,8 +82,9 @@ const ProductDetails = () => {
     }
   }, [dispatch]);
 
+  // Listin g of product acc. to their Id's received from previous page
   const ShowProducts = () => (
-    <div className="d-flex row" key={product.id}>
+    <div className="d-flex row " key={product.id}>
       <div className="col-md-6 col-sm-3 mt-5">
         <img
           src={product.image}
@@ -92,14 +93,14 @@ const ProductDetails = () => {
           width="400px"
         />
       </div>
-      <div className="col-md-6 mt-5">
-        <h4 className="text-uppercase text-black-50">{product.category}</h4>
-        <h1 className="display-5">{product.title}</h1>
-        <p className="lead fw-bolder">
+      <div className="col-md-6 mt-5  ">
+        <h4 className="text-uppercase text-black-50 overflow-hidden">{product.category}</h4>
+        <h1 className="display-5 overflow-hidden">{product.title}</h1>
+        <p className="lead fw-bolder overflow-hidden">
           Rating {product.rating && product.rating.rate}
           <FaStar />
         </p>
-        <h3 className="display-6 fw-bolder my-4">${product.price}</h3>
+        <h3 className="display-6 fw-bolder my-4 overflow-hidden">${product.price}</h3>
         <p className="lead">{product.description}</p>
         <button className="btn btn-primary" onClick={() => addProduct(product)}>
           Add to Cart
