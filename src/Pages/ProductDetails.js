@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/action/action";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  //const cartItems = useSelector((state) => state.handleCart);
+  const cartItems = useSelector((state) => state.handleCart);
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
 
@@ -94,16 +94,20 @@ const ProductDetails = () => {
         />
       </div>
       <div className="col-md-6 mt-5  ">
-        <h4 className="text-uppercase text-black-50 overflow-hidden">{product.category}</h4>
+        <h4 className="text-uppercase text-black-50 overflow-hidden">
+          {product.category}
+        </h4>
         <h1 className="display-5 overflow-hidden">{product.title}</h1>
         <p className="lead fw-bolder overflow-hidden">
           Rating {product.rating && product.rating.rate}
           <FaStar />
         </p>
-        <h3 className="display-6 fw-bolder my-4 overflow-hidden">${product.price}</h3>
+        <h3 className="display-6 fw-bolder my-4 overflow-hidden">
+          ${product.price}
+        </h3>
         <p className="lead">{product.description}</p>
         <button className="btn btn-primary" onClick={() => addProduct(product)}>
-          Add to Cart
+          Add to Cart ({cartItems.length})
         </button>
         <NavLink to="/MyCart" className="btn btn-outline-dark ms-2">
           Go to Cart

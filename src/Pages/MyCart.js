@@ -60,16 +60,15 @@ const MyCart = () => {
               <img
                 src={item.image}
                 alt={item.title}
-                height="200px"
-                width="180px"
+                height="150px"
+                width="150px"
               />
             </div>
-            <div className="col-md-4 ">
+            <div className="col-md-4 flex-wrap mt-3 ">
               <h3 className="overflow-hidden"> {item.title} </h3>
               <p className="lead"> {item.description} </p>
-              <p className="lead fw-bolder">${item.price}</p>
-
-              <p>{item.qty}</p>
+              <p className="lead fw-bolder">Items Quantity-: {item.qty}</p>
+              <p className="lead fw-bolder">Price of 1 Product is-: ${item.price}</p>
             </div>
           </div>
         </div>

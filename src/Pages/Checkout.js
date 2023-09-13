@@ -1,10 +1,9 @@
-import React  from "react";
-import {  useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 //import { addToCart } from "../Redux/action/action";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.handleCart);
-
 
   var total = 0;
   total = cartItems.reduce((acc, item) => {
@@ -18,9 +17,11 @@ const Checkout = () => {
         key={item.id}
       >
         <div>
-          <h6 className="my-0">{item.title}</h6>
+          <h6 className="my-0 overflow-hidden">
+            {item.title.substring(0, 20)}
+          </h6>
         </div>
-        <span className="lead fw-bold">
+        <span className="lead ">
           {item.qty} X ${item.price}
         </span>
       </li>
@@ -34,7 +35,7 @@ const Checkout = () => {
       <div className="row">
         <div className="col-md-4 order-md-2 mb-4">
           <h4 className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-muted">Your cart</span>
+            <span className="text-muted overflow-hidden">Your cart</span>
             <span className="badge bg-warning rounded-pill">
               {" "}
               {cartItems.length}{" "}
@@ -44,12 +45,12 @@ const Checkout = () => {
             {cartItemElements}
 
             <li className="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>${total.toFixed(2)}</strong>
+              <span className="fw-bold">Total (USD)</span>
+              <strong className="fw-bold">${total.toFixed(2)}</strong>
             </li>
           </ul>
 
-          <form className="card p-2">
+          {/* <form className="card p-2">
             <div className="input-group">
               <input
                 type="text"
@@ -62,7 +63,7 @@ const Checkout = () => {
                 </button>
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
         <div className="col-md-8 order-md-1">
           <h4 className="mb-3">Billing address</h4>

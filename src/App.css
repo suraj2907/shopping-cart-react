@@ -2,6 +2,10 @@
   overflow-x: hidden;
 }
 
+/* .hover-text:hover {
+  color: #b40d0d;
+} */
+
 .center {
   display: flex;
   align-items: center;

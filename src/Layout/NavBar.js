@@ -23,17 +23,50 @@ const NavBar = () => {
   const handleToggle = () => {
     setToggle(!toggle);
   };
+
+  const renderCartIconAndCount = () => {
+    if (context.user) {
+      return (
+        <NavItem className="ms-auto">
+          <NavLink
+            tag={Link}
+            to="/MyCart"
+            style={{
+              width: "max-content",
+            }}
+          >
+            <FaShoppingCart /> Cart ({cartItems.length})
+          </NavLink>
+        </NavItem>
+      );
+    }
+    return null;
+  };
+
   return (
     <Navbar light expand="md">
       <NavbarBrand>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          Clothing WebSite
+        <Link
+          to="/"
+          className="text-dark hover-text"
+          style={{ textDecoration: "none" }}
+        >
+          E-Commerce WebSite
         </Link>
       </NavbarBrand>
       <NavbarText>
-        {context.user?.email ? <div> {context.user?.email} </div> : ""}
+        {context.user?.email ? (
+          <div className="text-center text-dark font-weight-bold ">
+            {" "}
+            {context.user?.email}{" "}
+          </div>
+        ) : (
+          ""
+        )}
       </NavbarText>
-
+      <Nav justified className="ms-5">
+        {renderCartIconAndCount()}
+      </Nav>
       <NavbarToggler onClick={handleToggle} />
       <Collapse isOpen={toggle} navbar className="me-2">
         <Nav justified className="ms-auto">
@@ -41,20 +74,10 @@ const NavBar = () => {
             <>
               <NavItem>
                 <NavLink
-                  tag={Link}
-                  to="/MyCart"
-                  style={{
-                    width: "max-content",
-                  }}
-                >
-                  <FaShoppingCart /> Cart ({cartItems.length})
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
                   onClick={() => {
                     context.setUser(null);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Logout
                 </NavLink>
