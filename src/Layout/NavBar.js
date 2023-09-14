@@ -32,6 +32,7 @@ const NavBar = () => {
       .signOut()
       .then(() => {
         context.setUser(null);
+        localStorage.clear();
       })
       .catch((error) => {
         console.log(error);
