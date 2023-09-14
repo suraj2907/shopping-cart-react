@@ -24,6 +24,18 @@ const NavBar = () => {
     setToggle(!toggle);
   };
 
+  const handleLogOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        context.setUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const renderCartIconAndCount = () => {
     if (context.user) {
       return (
@@ -74,9 +86,7 @@ const NavBar = () => {
             <>
               <NavItem>
                 <NavLink
-                  onClick={() => {
-                    context.setUser(null);
-                  }}
+                  onClick={() => handleLogOut()}
                   style={{ cursor: "pointer" }}
                 >
                   Logout
