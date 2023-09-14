@@ -29,7 +29,7 @@ const handleCart = (state = cart, action) => {
           },
         ];
       }
-      break;
+     
 
     case REMOVE_FROM_CART:
       const existingProductToRemove = state.find(
@@ -49,7 +49,7 @@ const handleCart = (state = cart, action) => {
         localStorage.setItem("CartItems", JSON.stringify(updatedCart));
         return updatedCart;
       }
-      break;
+      
 
     case UPDATE_CART_FROM_CACHE:
       const cartItems = action.payload.map((item) => ({
@@ -60,7 +60,7 @@ const handleCart = (state = cart, action) => {
 
     default:
       return state;
-      break;
+      
   }
 };
 
