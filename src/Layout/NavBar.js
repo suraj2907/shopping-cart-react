@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 import {
   Collapse,
