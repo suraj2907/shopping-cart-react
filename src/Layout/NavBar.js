@@ -48,8 +48,8 @@ const NavBar = () => {
       <NavbarBrand>
         <Link
           to="/"
-          className="text-dark hover-text"
-          style={{ textDecoration: "none" }}
+          className="text-dark text-custom"
+          style={{ textDecoration: "none", transition: "color 0.3s" }}
         >
           E-Commerce WebSite
         </Link>

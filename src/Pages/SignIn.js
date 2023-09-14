@@ -7,7 +7,6 @@ import { UserContext } from "../Context/UserContext";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 const SignIn = () => {
   const context = useContext(UserContext);
   const [email, setEmail] = useState("");
@@ -54,13 +53,20 @@ const SignIn = () => {
   }
 
   return (
-    <div>
+    <div className="d-flex justify-content-around align-items-center gap-5 login-bg ">
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="login-img">
+          <img height={500} width={500} src="bg-img.png" alt="signup-img" />
+        </div>
+      </div>
+
       <div className="center">
         <form
           onSubmit={handleSubmit}
           className="signin-container"
           style={{ fontWeight: "bold" }}
         >
+          <h3 className="overflow-hidden mb-3 ">LogIn Here</h3>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input
