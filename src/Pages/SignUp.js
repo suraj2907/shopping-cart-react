@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { UserContext } from "../Context/UserContext";
-import { Navigate } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
@@ -29,7 +29,11 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSignUp();
+    if (context.user?.email && context.user?.password) {
+      handleSignUp();
+    } else {
+      toast("error", { type: "error" });
+    }
   };
 
   const handleShowPasswordToggle = () => {
@@ -61,6 +65,7 @@ const SignUp = () => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter email"
+              required="true"
               style={{ border: "1px solid black", borderRadius: "10px" }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -73,6 +78,7 @@ const SignUp = () => {
               class="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
+              required="true"
               style={{ border: "1px solid black", borderRadius: "10px" }}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -93,6 +99,12 @@ const SignUp = () => {
           <button type="submit" class="btn btn-primary">
             SignUp
           </button>
+          <p className="text-center mt-3 ">
+            Already have and account
+            <NavLink tag={Link} to="/signin" className="btn btn-primary mt-2">
+              Login
+            </NavLink>
+          </p>
         </form>
       </div>
     </div>

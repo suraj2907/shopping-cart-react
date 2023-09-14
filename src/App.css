@@ -45,6 +45,11 @@
   background: #a184d1;
 }
 
+.navbar-vertical-collapse{
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 @media only screen and (max-width: 450px) {
   .signin-container {
     width: 90%;
@@ -101,5 +106,11 @@
 @media (max-width: 600px) {
   .login-mobile {
     flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .login-img {
+    width: 450px;
+    height: 450px;
+    overflow-y: hidden;
   }
 }

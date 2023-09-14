@@ -83,8 +83,12 @@ const NavBar = () => {
         {renderCartIconAndCount()}
       </Nav>
       <NavbarToggler onClick={handleToggle} />
-      <Collapse isOpen={toggle} navbar className="me-2">
-        <Nav justified className="ms-auto">
+      <Collapse
+        isOpen={toggle}
+        navbar
+        className="me-2 navbar-vertical-collapse"
+      >
+        <Nav justified className="ms-auto nav navbar-expand-sm ">
           {context.user ? (
             <>
               <NavItem>
