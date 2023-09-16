@@ -29,7 +29,6 @@ const handleCart = (state = cart, action) => {
           },
         ];
       }
-     
 
     case REMOVE_FROM_CART:
       const existingProductToRemove = state.find(
@@ -38,7 +37,9 @@ const handleCart = (state = cart, action) => {
 
       if (existingProductToRemove.qty === 1) {
         // Remove the item from the cart if qty is 1
-        const updatedCart = state.filter((item) => item.id !== product.id);
+        const updatedCart = state.filter(
+          (item) => item.id !== product.id || item.qty > 1
+        );
         localStorage.setItem("CartItems", JSON.stringify(updatedCart));
         return updatedCart;
       } else {
@@ -49,7 +50,6 @@ const handleCart = (state = cart, action) => {
         localStorage.setItem("CartItems", JSON.stringify(updatedCart));
         return updatedCart;
       }
-      
 
     case UPDATE_CART_FROM_CACHE:
       const cartItems = action.payload.map((item) => ({
@@ -60,7 +60,6 @@ const handleCart = (state = cart, action) => {
 
     default:
       return state;
-      
   }
 };
 

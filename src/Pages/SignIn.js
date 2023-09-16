@@ -33,11 +33,7 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (context.user?.email && context.user?.password) {
-      handleSignIn();
-    } else {
-      toast("error", { type: "error" });
-    }
+    handleSignIn();
   };
   useEffect(() => {
     const isLoggedIn = window.localStorage.getItem("isloggedin");

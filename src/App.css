@@ -45,9 +45,18 @@
   background: #a184d1;
 }
 
-.navbar-vertical-collapse{
+.navbar-vertical-collapse {
   flex-direction: column;
   align-items: flex-start;
+}
+
+/* Mycart */
+.qty-btn {
+  padding: 5px 10px !important;
+  border: 1px solid black !important;
+  border-radius: 20% !important;
+  color: black !important;
+  background-color: #ffbd03 !important;
 }
 
 @media only screen and (max-width: 450px) {

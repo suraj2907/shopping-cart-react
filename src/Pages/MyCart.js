@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  //addToCart,
+  addToCart,
   removeFromCart,
   updateCartItemsFromCache,
 } from "../Redux/action/action";
@@ -18,6 +18,56 @@ const MyCart = () => {
       dispatch(updateCartItemsFromCache(cartItems));
     }
   }, [dispatch]);
+
+  const handleIncrement = (item) => {
+    // Dispatch the addToCart action to increment quantity in Redux store
+    dispatch(addToCart(item));
+
+    // Update the quantity in local storage
+    const existingCartItemsJSON = localStorage.getItem("CartItems");
+    const existingCartItems = existingCartItemsJSON
+      ? JSON.parse(existingCartItemsJSON)
+      : [];
+
+    const itemIndexToUpdate = existingCartItems.findIndex(
+      (cartItem) => cartItem.id === item.id
+    );
+
+    if (itemIndexToUpdate !== -1) {
+      existingCartItems[itemIndexToUpdate].qty++;
+      localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
+    }
+  };
+
+  const handleDecrement = (item) => {
+    // Find the item in local storage
+    const existingCartItemsJSON = localStorage.getItem("CartItems");
+    const existingCartItems = existingCartItemsJSON
+      ? JSON.parse(existingCartItemsJSON)
+      : [];
+
+    const itemIndexToUpdate = existingCartItems.findIndex(
+      (cartItem) => cartItem.id === item.id
+    );
+
+    if (itemIndexToUpdate !== -1) {
+      if (existingCartItems[itemIndexToUpdate].qty > 1) {
+        // If the quantity is greater than 1, update Redux store and local storage
+        dispatch(removeFromCart(item));
+        existingCartItems[itemIndexToUpdate].qty--;
+
+        // Update local storage
+        localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
+      } else {
+        // If the quantity is 1, remove the item from Redux store and local storage
+        dispatch(removeFromCart(item));
+
+        // Remove the item from local storage
+        existingCartItems.splice(itemIndexToUpdate, 1);
+        localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
+      }
+    }
+  };
 
   const handleClose = (item) => {
     dispatch(removeFromCart(item));
@@ -66,9 +116,32 @@ const MyCart = () => {
             </div>
             <div className="col-md-4 flex-wrap mt-3 ">
               <h3 className="overflow-hidden"> {item.title} </h3>
-              <p className="lead"> {item.description} </p>
-              <p className="lead fw-bolder">Items Quantity-: {item.qty}</p>
-              <p className="lead fw-bolder">Price of 1 Product is-: ${item.price}</p>
+              <p className="lead"> {item.description.substring(0, 250)} </p>
+              <div className="d-flex justify-content-around align-items-center">
+                <button
+                  className="qty-btn btn fw-semibold"
+                  onClick={() => handleDecrement(item)}
+                >
+                  Decrease
+                </button>
+                <p className="fs-2xl fw-semi-bolder  text-center ">
+                  Items Quantity-:
+                  <span className="text-danger text-center fw-bolder fs-4">
+                    {" "}
+                    {item.qty}
+                  </span>
+                </p>
+                <button
+                  className="qty-btn btn fw-semibold"
+                  onClick={() => handleIncrement(item)}
+                >
+                  Increase
+                </button>
+              </div>
+              <p className="fs-5 text-center mt-3 fw-semi-bolder">
+                Price of 1 Product is-:{" "}
+                <span className="text-success fw-bolder "> ${item.price}</span>
+              </p>{" "}
             </div>
           </div>
         </div>
