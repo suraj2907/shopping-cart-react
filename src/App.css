@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  flex-direction: column;
 }
 .center1 {
   display: flex;
@@ -30,15 +31,15 @@
 
 .signin-container {
   padding: 2rem;
-  width: max-content;
-  height: max-content;
+  width: 320px;
+  height: 400px;
   border: 1px solid rgb(101, 101, 205);
   border-radius: 30px;
   background: #a184d1;
 }
 .signup-container {
   padding: 2rem;
-  width: max-content;
+  width: 320px;
   height: max-content;
   border: 1px solid rgb(101, 101, 205);
   border-radius: 30px;

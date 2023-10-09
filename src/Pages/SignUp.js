@@ -22,18 +22,15 @@ const SignUp = () => {
         context.setUser({ email: res.user.email, uid: res.user.uid });
       })
       .catch((error) => {
-        console.log(error);
-        toast("error", { type: "error" });
+        console.log(error.message);
+        console.log(error.code);
+        toast(error.message, { type: "error" });
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (context.user?.email && context.user?.password) {
-      handleSignUp();
-    } else {
-      toast("error", { type: "error" });
-    }
+    handleSignUp();
   };
 
   const handleShowPasswordToggle = () => {
@@ -99,12 +96,10 @@ const SignUp = () => {
           <button type="submit" class="btn btn-primary">
             SignUp
           </button>
-          <p className="text-center mt-3 ">
-            Already have and account
-            <NavLink tag={Link} to="/signin" className="btn btn-primary mt-2">
-              Login
-            </NavLink>
-          </p>
+          <p className="text-center mt-3 ">Already have and account</p>
+          <NavLink tag={Link} to="/signin" className="btn btn-primary  mt-1">
+            Login
+          </NavLink>
         </form>
       </div>
     </div>

@@ -53,10 +53,10 @@ const SignIn = () => {
   }
 
   return (
-    <div className="d-flex login-mobile justify-content-around align-items-center  login-bg ">
+    <div className="d-flex login-mobile justify-content-around align-items-center gap-5 login-bg ">
       <div className="d-flex justify-content-center align-items-center">
         <div className="login-img">
-          <img height={500} width={500} src="bg-img.png" alt="signup-img" />
+          <img height={500} width={500} src="bg-img.png" alt="signin-img" />
         </div>
       </div>
 
