@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
+// Import the CSS styles for react-loading-skeleton
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -123,16 +125,15 @@ const ProductDetails = () => {
           {isLoading ? (
             <>
               {" "}
-              <div className="col-md-6">
+              <div className="col-md-3">
                 <Skeleton height={400} />
               </div>
-              <div className="col-md-6">
+              <div className=" col-md-3">
                 <Skeleton width={300} height={50} />
                 <Skeleton height={75} />
-                <Skeleton width={25} height={150} />
+                <Skeleton width={50} height={25} />
                 <Skeleton height={50} />
                 <Skeleton height={150} />
-                <Skeleton height={50} width={100} />
                 <Skeleton height={50} width={100} />
               </div>
             </>

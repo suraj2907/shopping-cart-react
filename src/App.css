@@ -60,30 +60,16 @@
   background-color: #ffbd03 !important;
 }
 
-@media only screen and (max-width: 450px) {
-  .signin-container {
-    width: 90%;
-  }
-  .signup-container {
-    width: 90%;
-  }
-}
-
 /* loader */
 .loading-wave {
-  width: 60px;
-  height: 50px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  animation: loading-wave-animation 2s ease-in-out infinite;
 }
 
 .loading-bar {
-  width: 10px;
-  height: 5px;
-  margin: 0 3px;
-  background-color: var(--button-bg-secondary);
-  border-radius: 5px;
+  overflow: hidden;
   animation: loading-wave-animation 2s ease-in-out infinite;
 }
 
@@ -110,6 +96,15 @@
 
   100% {
     height: 10px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .signin-container {
+    width: 90%;
+  }
+  .signup-container {
+    width: 90%;
   }
 }
 

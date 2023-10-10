@@ -3,6 +3,8 @@ import axios from "axios";
 import Footer from "../Layout/Footer";
 import Skeleton from "react-loading-skeleton";
 import { NavLink } from "react-router-dom";
+// Import the CSS styles for react-loading-skeleton
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ProductItems = () => {
   const [products, setProducts] = useState([]);
@@ -141,27 +143,44 @@ const ProductItems = () => {
               <hr />
             </div>
           </div>
-          <div className="d-flex row justify-content-center ">
+          <div className="d-flex row justify-content-center overflow-hidden ">
             {isLoading ? (
               <>
-                <div className="col-md-3">
-                  <Skeleton height={350} />
+                <div className="col-md-3 d-flex flex-column align-items-center gap-1">
+                  <Skeleton height={250} width={250} />
+                  <Skeleton height={50} width={150} />
+                  <Skeleton height={75} width={200} />
+                  <Skeleton height={50} width={50} />
+                  <Skeleton height={35} width={50} />
                 </div>
-                <div className="col-md-3">
-                  <Skeleton height={350} />
+                <div className="col-md-3 d-flex flex-column align-items-center gap-1">
+                  <Skeleton height={250} width={250} />
+                  <Skeleton height={50} width={150} />
+                  <Skeleton height={75} width={200} />
+                  <Skeleton height={50} width={50} />
+                  <Skeleton height={35} width={50} />
                 </div>
-                <div className="col-md-3">
-                  <Skeleton height={350} />
+                <div className="col-md-3 d-flex flex-column align-items-center gap-1">
+                  <Skeleton height={250} width={250} />
+                  <Skeleton height={50} width={150} />
+                  <Skeleton height={75} width={200} />
+                  <Skeleton height={50} width={50} />
+                  <Skeleton height={35} width={50} />
                 </div>
-                <div className="col-md-3">
-                  <Skeleton height={350} />
+                <div className="col-md-3 d-flex flex-column align-items-center gap-1">
+                  <Skeleton height={250} width={250} />
+                  <Skeleton height={50} width={150} />
+                  <Skeleton height={75} width={200} />
+                  <Skeleton height={50} width={50} />
+                  <Skeleton height={35} width={50} />
                 </div>
               </>
             ) : (
               <ShowProducts />
             )}
           </div>
-          <Footer />
+
+          {isLoading ? "" : <Footer />}
         </div>
       </div>
     </>
