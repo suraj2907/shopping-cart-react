@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { UserContext } from "../Context/UserContext";
-import { Navigate } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SignIn = () => {
@@ -53,65 +53,106 @@ const SignIn = () => {
   }
 
   return (
-    <div className="d-flex login-mobile justify-content-around align-items-center gap-5 login-bg ">
-      <div className="d-flex justify-content-center align-items-center">
-        <div className="login-img">
-          <img height={500} width={500} src="bg-img.png" alt="signin-img" />
+    <section
+      className="vh-90 overflow-hidden"
+      style={{ backgroundColor: "#9A616D" }}
+    >
+      <div className="container py-5" style={{ overflowY: "hidden" }}>
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col col-md-15">
+            <div className="card" style={{ borderRadius: "1rem" }}>
+              <div className="row g-0">
+                <div className="col-md-6 col-lg-5 d-none d-md-block">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                    alt="login form"
+                    height={650}
+                    width={650}
+                    style={{ borderRadius: "1rem 0 0 1rem" }}
+                  />
+                </div>
+                <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div className="card-body p-4 p-lg-5 text-black">
+                    <form onSubmit={handleSubmit}>
+                      <div className="d-flex align-items-center mb-3 pb-1">
+                        <i
+                          className="fas fa-cubes fa-2x me-3"
+                          style={{ color: "#ff6219" }}
+                        ></i>
+                      </div>
+
+                      <h2
+                        className="fw-bold  mb-3 pb-3"
+                        style={{ letterSpacing: "1px" }}
+                      >
+                        Sign into your account
+                      </h2>
+
+                      <div className="form-outline mb-4">
+                        <input
+                          type="email"
+                          id="form2Example17"
+                          className="form-control form-control-lg"
+                          required="true"
+                          placeholder="Enter Your Email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          id="form2Example27"
+                          className="form-control form-control-lg"
+                          required="true"
+                          placeholder="Enter Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group form-check">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="exampleCheck1"
+                          checked={showPassword}
+                          onChange={handleShowPasswordToggle}
+                        />
+                        <label className="form-check-label" for="exampleCheck1">
+                          Show Password
+                        </label>
+                      </div>
+
+                      <div className="pt-1 mb-4">
+                        <button
+                          className="btn btn-lg btn-block login-button"
+                          type="submit"
+                        >
+                          Login
+                        </button>
+                      </div>
+                      <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
+                        Don't have an account?{" "}
+                        <NavLink to="/signup" style={{ color: "#393f81" }}>
+                          Register here
+                        </NavLink>
+                      </p>
+                      <a href="#!" className="small text-muted">
+                        Terms of use.
+                      </a>
+                      <a href="#!" className="small text-muted">
+                        Privacy policy
+                      </a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="center">
-        <form
-          onSubmit={handleSubmit}
-          className="signin-container"
-          style={{ fontWeight: "bold" }}
-        >
-          <h3 className="overflow-hidden mb-3 ">LogIn Here</h3>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              required="true"
-              style={{ border: "1px solid black", borderRadius: "10px" }}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              class="form-control"
-              id="exampleInputPassword1"
-              placeholder="Password"
-              required="true"
-              style={{ border: "1px solid black", borderRadius: "10px" }}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div class="form-group form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-              checked={showPassword}
-              onChange={handleShowPasswordToggle}
-            />
-            <label class="form-check-label" for="exampleCheck1">
-              Show Password
-            </label>
-          </div>
-          <button type="submit" class="btn btn-primary">
-            SignIn
-          </button>
-        </form>
-      </div>
-    </div>
+    </section>
   );
 };
 

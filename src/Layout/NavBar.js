@@ -59,19 +59,32 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar light expand="md">
+    <Navbar
+      expand="md"
+      style={{
+        backgroundColor: "#f5f5f5",
+        color: " #333333",
+      }}
+    >
       <NavbarBrand>
         <Link
           to="/"
-          className="text-dark text-custom"
-          style={{ textDecoration: "none", transition: "color 0.3s" }}
+          className="text-brand-name"
+          style={{
+            textDecoration: "none",
+            transition: "all 0.3s ",
+            color: " #333333",
+          }}
         >
           E-Commerce WebSite
         </Link>
       </NavbarBrand>
       <NavbarText>
         {context.user?.email ? (
-          <div className="text-center text-dark font-weight-bold ">
+          <div
+            className="text-center font-weight-bold "
+            style={{ color: "#333333 !important" }}
+          >
             {" "}
             {context.user?.email}{" "}
           </div>
