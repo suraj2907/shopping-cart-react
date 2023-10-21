@@ -2,6 +2,11 @@
 
 This project is an E-Commerce website built with React, showcasing a seamless shopping experience for buyers. It integrates the FakeStore API to provide a diverse product catalog for users. The project also emphasizes a smooth UI and enhanced user experience with features like price and category filters, implemented using React Skeleton Loader for efficient loading.
 
+
+## Live Demo
+
+A live demo of the project is available [here](https://e-commerce-sj.netlify.app/signup).
+
 ## Installation
 
 To run this project locally, follow these steps:
