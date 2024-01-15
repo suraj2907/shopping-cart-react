@@ -62,7 +62,7 @@ const NavBar = () => {
     <Navbar
       expand="md"
       style={{
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "black",
         color: " #333333",
       }}
     >

@@ -53,20 +53,17 @@ const SignIn = () => {
   }
 
   return (
-    <section
-      className="vh-90 overflow-hidden"
-      style={{ backgroundColor: "#9A616D" }}
-    >
-      <div className="container py-5" style={{ overflowY: "hidden" }}>
+    <section className="vh-100" style={{ backgroundColor: "#9A616D" }}>
+      <div className="container py-1">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col col-md-15">
+          <div className="col col-md-15 signin-container">
             <div className="card" style={{ borderRadius: "1rem" }}>
               <div className="row g-0">
                 <div className="col-md-6 col-lg-5 d-none d-md-block">
                   <img
                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
                     alt="login form"
-                    height={650}
+                    height={580}
                     width={650}
                     style={{ borderRadius: "1rem 0 0 1rem" }}
                   />

@@ -1,6 +1,6 @@
 * {
   overflow-x: hidden;
-  overflow-y: hidden ;
+  overflow-y: hidden;
 }
 
 .text-brand-name:hover {
@@ -24,7 +24,6 @@
   padding: 8px 18px !important;
 }
 
-
 .center {
   display: flex;
   align-items: center;
@@ -39,14 +38,9 @@
   height: 100vh;
   flex-direction: column;
 }
-
-.signin-container {
-  padding: 2rem;
-  width: 320px;
-  height: 400px;
-  border: 1px solid rgb(101, 101, 205);
-  border-radius: 30px;
-  background: #a184d1;
+.signin-container{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .signup-container {
   padding: 2rem;
@@ -71,14 +65,14 @@
   background-color: #ffbd03 !important;
 }
 
-@media only screen and (max-width: 450px) {
+/* @media only screen and (max-width: 450px) {
   .signin-container {
-    width: 90%;
+    padding-top: 4rem !important;
   }
   .signup-container {
     width: 90%;
   }
-}
+} */
 
 /* loader */
 .loading-wave {
