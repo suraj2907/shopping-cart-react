@@ -53,10 +53,13 @@ const SignIn = () => {
   }
 
   return (
-    <section className="vh-100" style={{ backgroundColor: "#9A616D" }}>
-      <div className="container py-1">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col col-md-15 signin-container">
+    <section
+      className="vh-100 overflow-hidden"
+      style={{ backgroundColor: "#9A616D" }}
+    >
+      <div className="container  py-1">
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <div className="col col-md-16 signin-container">
             <div className="card" style={{ borderRadius: "1rem" }}>
               <div className="row g-0">
                 <div className="col-md-6 col-lg-5 d-none d-md-block">
@@ -68,8 +71,8 @@ const SignIn = () => {
                     style={{ borderRadius: "1rem 0 0 1rem" }}
                   />
                 </div>
-                <div className="col-md-6 col-lg-7 d-flex align-items-center">
-                  <div className="card-body p-4 p-lg-5 text-black">
+                <div className="col-md-7 d-flex justify-content-center align-items-center">
+                  <div className="text-black">
                     <form onSubmit={handleSubmit}>
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <i
@@ -89,7 +92,7 @@ const SignIn = () => {
                         <input
                           type="email"
                           id="form2Example17"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-lg w-100"
                           required="true"
                           placeholder="Enter Your Email"
                           value={email}
