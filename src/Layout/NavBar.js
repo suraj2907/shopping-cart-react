@@ -66,18 +66,17 @@ const NavBar = () => {
         color: " #333333",
       }}
     >
-      <NavbarBrand>
-        <Link
-          to="/"
-          className="text-brand-name"
-          style={{
-            textDecoration: "none",
-            transition: "all 0.3s ",
-            color: " #333333",
-          }}
-        >
-          E-Commerce WebSite
-        </Link>
+      <NavbarBrand
+        tag={Link}
+        to="/"
+        className="text-brand-name"
+        style={{
+          textDecoration: "none",
+          transition: "all 0.3s ",
+          color: " #333333",
+        }}
+      >
+        E-Commerce WebSite
       </NavbarBrand>
       <NavbarText>
         {context.user?.email ? (
