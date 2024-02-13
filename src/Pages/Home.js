@@ -11,7 +11,7 @@ const Home = () => {
   }
   return (
     <>
-      <div className="col-12 overflow-hidden">
+      <div className="col-12">
         <ProductItems />
       </div>
     </>
