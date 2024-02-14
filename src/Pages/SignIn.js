@@ -57,22 +57,23 @@ const SignIn = () => {
       className="vh-100 overflow-hidden"
       style={{ backgroundColor: "#9A616D" }}
     >
-      <div className="container  py-1">
+      <div className="container-fluid">
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="col col-md-16 signin-container">
+          <div className="col-sm-8 col-md-10 col-lg-8 signin-container">
             <div className="card" style={{ borderRadius: "1rem" }}>
               <div className="row g-0">
-                <div className="col-md-6 col-lg-5 d-none d-md-block">
+                <div className="col-md-6 col-lg-5 d-flex flex-column ">
                   <img
                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
                     alt="login form"
                     height={580}
+                    className="img-fluid"
                     width={650}
                     style={{ borderRadius: "1rem 0 0 1rem" }}
                   />
                 </div>
-                <div className="col-md-7 d-flex justify-content-center align-items-center">
-                  <div className="text-black">
+                <div className=" container-fluid col-lg-7   d-flex login-mobile justify-content-center align-items-center">
+                  <div className="text-black ">
                     <form onSubmit={handleSubmit}>
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <i

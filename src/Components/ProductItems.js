@@ -98,7 +98,7 @@ const ProductItems = () => {
         </div>
         <div className="d-flex flex-wrap justify-content-center">
           {filteredProducts.map((item) => (
-            <div className=" d-flex  flex-wrap col-md-3 col-sm-6 mb-4">
+            <div key={item.id} className=" d-flex flex-wrap col-md-3 col-sm-6 mb-4">
               <div
                 className="card h-100 ms-5 p-4 d-flex justify-content-center outline text-center"
                 key={item.id}
