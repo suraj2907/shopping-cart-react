@@ -97,51 +97,54 @@ const MyCart = () => {
 
   const cartItems = (item) => {
     return (
-      <div className="px-4 my-5 bg-light rounded-3" key={item.id}>
-        <div className="container py-4">
+      <div className="px-4 my-5 bg-gray-100 rounded-2xl shadow" key={item.id}>
+        <div className="py-4 relative">
           <button
-            className="btn-close float-end"
+            className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-xl"
             aria-label="Close"
             onClick={() => handleClose(item)}
-          ></button>
-
-          <div className="d-flex row justify-content-center">
-            <div className="col-md-4">
+          >
+            &times;
+          </button>
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div>
               <img
                 src={item.image}
                 alt={item.title}
-                height="150px"
-                width="150px"
+                className="h-36 w-36 object-contain"
               />
             </div>
-            <div className="col-md-4 flex-wrap mt-3 ">
-              <h3 className="overflow-hidden"> {item.title} </h3>
-              <p className="lead"> {item.description.substring(0, 250)} </p>
-              <div className="d-flex justify-content-around align-items-center">
+            <div className="flex-1 mt-3 md:mt-0">
+              <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+              <p className="text-gray-600 mb-2">
+                {item.description.substring(0, 250)}
+              </p>
+              <div className="flex flex-wrap gap-4 items-center justify-between">
                 <button
-                  className="qty-btn btn fw-semibold"
+                  className="px-4 py-2 bg-gray-200 rounded-lg font-semibold hover:bg-gray-300 transition"
                   onClick={() => handleDecrement(item)}
                 >
                   Decrease
                 </button>
-                <p className="fs-2xl fw-semi-bolder  text-center ">
-                  Items Quantity-:
-                  <span className="text-danger text-center fw-bolder fs-4">
-                    {" "}
+                <p className="text-lg font-semibold text-center">
+                  Items Quantity:
+                  <span className="text-red-600 font-bold ml-2">
                     {item.qty}
                   </span>
                 </p>
                 <button
-                  className="qty-btn btn fw-semibold"
+                  className="px-4 py-2 bg-gray-200 rounded-lg font-semibold hover:bg-gray-300 transition"
                   onClick={() => handleIncrement(item)}
                 >
                   Increase
                 </button>
               </div>
-              <p className="fs-5 text-center mt-3 fw-semi-bolder">
-                Price of 1 Product is-:{" "}
-                <span className="text-success fw-bolder "> ${item.price}</span>
-              </p>{" "}
+              <p className="text-base text-center mt-3 font-semibold">
+                Price of 1 Product:
+                <span className="text-green-600 font-bold ml-2">
+                  ${item.price}
+                </span>
+              </p>
             </div>
           </div>
         </div>
@@ -151,11 +154,9 @@ const MyCart = () => {
 
   const emptyCart = () => {
     return (
-      <div className="my-4 px-3 bg-light rounded-3 ">
-        <div className="container py-4 ">
-          <div className="row">
-            <h3 className=" overflow-hidden">Your Cart is Empty</h3>
-          </div>
+      <div className="my-4 px-3 bg-gray-100 rounded-2xl shadow">
+        <div className="py-8 flex justify-center">
+          <h3 className="font-bold text-xl">Your Cart is Empty</h3>
         </div>
       </div>
     );
@@ -163,26 +164,23 @@ const MyCart = () => {
 
   const checkoutButton = () => {
     return (
-      <div className="container ">
-        <div className="row">
-          <NavLink
-            to="/checkout"
-            className="btn mb-5 btn-outline-primary w-25 mx-auto"
-          >
-            Checkout
-          </NavLink>
-        </div>
+      <div className="flex justify-center my-8">
+        <NavLink
+          to="/checkout"
+          className="px-8 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white transition"
+        >
+          Checkout
+        </NavLink>
       </div>
     );
   };
 
   return (
-    <>
+    <div className="max-w-4xl mx-auto px-4 py-8">
       {cartItem.length === 0 && emptyCart()}
-
       {cartItem.length !== 0 && cartItem.map(cartItems)}
       {cartItem.length !== 0 && checkoutButton()}
-    </>
+    </div>
   );
 };
 

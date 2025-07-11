@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .text-brand-name:hover {
   color: #a8ec81 !important;
   transform: scaleY(1) !important;
@@ -60,7 +64,7 @@
   background-color: #ffbd03 !important;
 }
 
-/* loader */
+/* loader
 .loading-wave {
   display: flex;
   justify-content: center;
@@ -97,7 +101,7 @@
   100% {
     height: 10px;
   }
-}
+} */
 
 @media only screen and (min-width: 767px) and (max-width: 999px) {
   .login-mobile {

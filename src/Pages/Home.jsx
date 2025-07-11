@@ -10,11 +10,11 @@ const Home = () => {
     return <Navigate to="/signin" />;
   }
   return (
-    <>
-      <div className="col-12">
+    <div className="w-full flex-col flex-wrap items-center justify-center min-h-screen bg-gray-50">
+      <div className="w-full px-4 py-8">
         <ProductItems />
       </div>
-    </>
+    </div>
   );
 };
 
