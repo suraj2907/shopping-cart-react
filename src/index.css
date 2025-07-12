@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-
-
-html{
-    margin: 0;
-    padding: 0;
-    overflow: auto;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
