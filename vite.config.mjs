@@ -11,6 +11,8 @@ export default defineConfig({
       external: [
         "@rollup/rollup-linux-x64-gnu",
         "@rollup/rollup-win32-x64-msvc",
+        "@rollup/rollup-darwin-x64",
+        "@rollup/rollup-darwin-arm64",
       ],
       output: {
         manualChunks: undefined,
@@ -23,9 +25,17 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["@rollup/rollup-linux-x64-gnu", "@rollup/rollup-win32-x64-msvc"],
+    exclude: [
+      "@rollup/rollup-linux-x64-gnu", 
+      "@rollup/rollup-win32-x64-msvc",
+      "@rollup/rollup-darwin-x64",
+      "@rollup/rollup-darwin-arm64"
+    ],
   },
   define: {
     global: "globalThis",
   },
+  ssr: {
+    noExternal: ['react', 'react-dom']
+  }
 });
