@@ -84,73 +84,85 @@ const ProductDetails = () => {
 
   // Listing of product acc. to their Id's received from previous page
   const ShowProducts = () => (
-    <div className="w-full flex justify-center">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 flex flex-col md:flex-row gap-10 max-w-4xl w-full items-start">
+    <>
+      {/* Image Section and Details Section, but no outer box */}
+      <div className="flex flex-col md:flex-row gap-12 w-full items-start">
         {/* Image Section */}
-        <div className="flex flex-1 justify-center items-center w-full md:w-1/2 bg-gray-50 rounded-2xl p-6 shadow-inner">
+        <div className="flex flex-col flex-1 justify-center items-center w-full md:w-1/2 bg-white rounded-2xl p-8 ">
           <img
             src={product.image}
             alt={product.title}
-            className="h-72 w-72 object-contain rounded-xl drop-shadow-lg mb-4"
+            className="h-80 w-80 object-contain rounded-xl drop-shadow-lg mb-6 bg-slate-50"
           />
+          {/* Image Gallery Placeholder */}
+          <div className="flex gap-3 mt-2">
+            <div className="h-16 w-16 bg-slate-200 rounded-lg flex items-center justify-center border-2 border-slate-300">
+              <img
+                src={product.image}
+                alt="thumb"
+                className="h-12 w-12 object-contain"
+              />
+            </div>
+            {/* Add more thumbnails here in the future */}
+          </div>
         </div>
         {/* Details Section */}
-        <div className="flex flex-wrap justify-center w-full md:w-1/2 gap-4">
-          <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full w-max mb-2 uppercase tracking-wide">
+        <div className="flex flex-col w-full md:w-1/2 gap-4">
+          <span className="inline-block px-3 py-1 bg-slate-900 text-yellow-400 text-xs font-semibold rounded-full w-max mb-2 uppercase tracking-wide shadow-sm">
             {product.category}
           </span>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-2 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-2 leading-tight">
             {product.title}
           </h1>
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-lg font-semibold text-gray-700 flex items-center">
+            <span className="text-lg font-semibold text-slate-800 flex items-center">
               {product.rating && product.rating.rate}
               <FaStar className="ml-1 text-yellow-400" />
             </span>
-            <span className="text-gray-400 text-sm">
+            <span className="text-slate-400 text-sm">
               ({product.rating && product.rating.count} reviews)
             </span>
           </div>
-          <h3 className="text-2xl font-bold text-blue-600 mb-2">
+          <h3 className="text-3xl font-bold text-yellow-400 mb-2">
             ${product.price}
           </h3>
-          <p className="text-gray-600 text-base mb-4 leading-relaxed">
+          <p className="text-slate-700 text-base mb-6 leading-relaxed">
             {product.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <button
-              className="flex-1 px-6 py-3 rounded-xl bg-yellow-400 text-slate-900 font-bold text-lg shadow hover:bg-yellow-300 transition"
+              className="flex-1 px-6 py-3 rounded-xl bg-yellow-400 text-slate-900 font-bold text-lg shadow hover:bg-yellow-300 transition border-2 border-yellow-400 hover:border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
               onClick={() => addProduct(product)}
             >
               Add to Cart ({cartItems.length})
             </button>
             <NavLink
               to="/MyCart"
-              className="flex-1 px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-bold text-lg text-center hover:bg-blue-600 hover:text-white transition shadow"
+              className="flex-1 px-6 py-3 rounded-xl border-2 border-slate-900 text-slate-900 font-bold text-lg text-center hover:bg-slate-900 hover:text-yellow-400 transition shadow focus:outline-none focus:ring-2 focus:ring-slate-900"
             >
               Go to Cart
             </NavLink>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-4xl p-6 bg-white rounded-2xl shadow-lg">
+    <div className="flex justify-center items-center min-h-screen bg-slate-50">
+      <div className="w-full max-w-4xl p-8 bg-white rounded-3xl shadow-2xl border border-slate-100">
         {isLoading ? (
           <div className="flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-1/2">
-              <div className="animate-pulse bg-gray-300 h-[400px] w-full rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[400px] w-full rounded"></div>
             </div>
             <div className="w-full md:w-1/2 flex flex-col gap-4">
-              <div className="animate-pulse bg-gray-300 h-[50px] w-[300px] rounded"></div>
-              <div className="animate-pulse bg-gray-300 h-[75px] w-full rounded"></div>
-              <div className="animate-pulse bg-gray-300 h-[25px] w-[50px] rounded"></div>
-              <div className="animate-pulse bg-gray-300 h-[50px] w-full rounded"></div>
-              <div className="animate-pulse bg-gray-300 h-[150px] w-full rounded"></div>
-              <div className="animate-pulse bg-gray-300 h-[50px] w-[100px] rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[50px] w-[300px] rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[75px] w-full rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[25px] w-[50px] rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[50px] w-full rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[150px] w-full rounded"></div>
+              <div className="animate-pulse bg-slate-200 h-[50px] w-[100px] rounded"></div>
             </div>
           </div>
         ) : (
