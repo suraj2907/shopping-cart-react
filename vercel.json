@@ -23,10 +23,5 @@
     "env": {
       "NODE_VERSION": "18.20.6"
     }
-  },
-  "functions": {
-    "app/api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
   }
 }
