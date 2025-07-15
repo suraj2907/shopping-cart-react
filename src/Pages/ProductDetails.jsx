@@ -92,7 +92,7 @@ const ProductDetails = () => {
           <img
             src={product.image}
             alt={product.title}
-            className="h-80 w-80 object-contain rounded-xl drop-shadow-lg mb-6 bg-slate-50"
+            className="h-80 w-full max-w-xs object-contain rounded-xl drop-shadow-lg mb-6 bg-slate-50"
           />
           {/* Image Gallery Placeholder */}
           <div className="flex gap-3 mt-2">
@@ -100,7 +100,7 @@ const ProductDetails = () => {
               <img
                 src={product.image}
                 alt="thumb"
-                className="h-12 w-12 object-contain"
+                className="h-12 w-full max-w-[48px] object-contain"
               />
             </div>
             {/* Add more thumbnails here in the future */}

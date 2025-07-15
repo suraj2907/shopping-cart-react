@@ -1,324 +1,329 @@
 import React from "react";
 import { useSelector } from "react-redux";
-//import { addToCart } from "../Redux/action/action";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.handleCart);
 
-  var total = 0;
-  total = cartItems.reduce((acc, item) => {
-    return acc + item.qty * item.price;
-  }, 0);
-
-  const cartItemElements = cartItems.map((item) => {
-    return (
-      <li
-        className="list-group-item d-flex justify-content-between lh-condensed"
-        key={item.id}
-      >
-        <div>
-          <h6 className="my-0 overflow-hidden">
-            {item.title.substring(0, 20)}
-          </h6>
-        </div>
-        <span className="lead ">
-          {item.qty} X ${item.price}
-        </span>
-      </li>
-    );
-  });
-  // console.log("CartItems:", cartItems);
-  // console.log("Total:", total);
+  const total = cartItems.reduce((acc, item) => acc + item.qty * item.price, 0);
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-4 order-md-2 mb-4">
-          <h4 className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-muted overflow-hidden">Your cart</span>
-            <span className="badge bg-warning rounded-pill">
-              {" "}
-              {cartItems.length}{" "}
+    <div className="max-w-5xl mx-auto px-4 py-16 bg-slate-50 min-h-screen">
+      <div className="pt-16 mb-10 flex flex-col items-center">
+        <h2 className="text-4xl font-extrabold text-slate-900 text-center tracking-tight drop-shadow-sm">
+          Checkout
+        </h2>
+        <div className="mt-2 w-16 h-1 bg-yellow-400 rounded-full"></div>
+      </div>
+      <div className="flex flex-col lg:flex-row gap-10">
+        {/* Cart Summary */}
+        <div className="lg:w-1/3 w-full bg-white rounded-3xl shadow-lg border border-slate-100 p-8 mb-8 lg:mb-0">
+          <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center justify-between">
+            <span>Your Cart</span>
+            <span className="bg-yellow-400 text-slate-900 font-bold rounded-full px-3 py-1 text-base">
+              {cartItems.length}
             </span>
-          </h4>
-          <ul className="list-group mb-3">
-            {cartItemElements}
-
-            <li className="list-group-item d-flex justify-content-between">
-              <span className="fw-bold">Total (USD)</span>
-              <strong className="fw-bold">${total.toFixed(2)}</strong>
-            </li>
+          </h3>
+          <ul className="divide-y divide-slate-100 mb-6">
+            {cartItems.map((item) => (
+              <li
+                key={item.id}
+                className="py-3 flex justify-between items-center"
+              >
+                <span className="font-medium text-slate-800 truncate max-w-[120px]">
+                  {item.title.substring(0, 20)}
+                </span>
+                <span className="text-slate-600 font-semibold">
+                  {item.qty} x{" "}
+                  <span className="text-green-600 font-bold">
+                    ${item.price}
+                  </span>
+                </span>
+              </li>
+            ))}
           </ul>
-
-          {/* <form className="card p-2">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Promo code"
-              />
-              <div className="input-group-append">
-                <button type="submit" className="btn btn-secondary">
-                  Redeem
-                </button>
-              </div>
-            </div>
-          </form> */}
+          <div className="flex justify-between items-center pt-4 border-t border-slate-100">
+            <span className="font-bold text-slate-900">Total (USD)</span>
+            <span className="text-xl font-extrabold text-green-600">
+              ${total.toFixed(2)}
+            </span>
+          </div>
         </div>
-        <div className="col-md-8 order-md-1">
-          <h4 className="mb-3">Billing address</h4>
-          <form className="needs-validation" novalidate="">
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label for="firstName">First name</label>
+        {/* Billing & Payment Form */}
+        <div className="lg:w-2/3 w-full bg-white rounded-3xl shadow-lg border border-slate-100 p-8">
+          <h3 className="text-2xl font-bold text-slate-900 mb-6">
+            Billing Address
+          </h3>
+          <form className="space-y-6">
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <label
+                  htmlFor="firstName"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  First name
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="firstName"
-                  placeholder=""
-                  value=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback">
-                  Valid first name is required.
-                </div>
               </div>
-              <div className="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
+              <div className="flex-1">
+                <label
+                  htmlFor="lastName"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  Last name
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="lastName"
-                  placeholder=""
-                  value=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback">
-                  Valid last name is required.
-                </div>
               </div>
             </div>
-
-            <div className="mb-3">
-              <label for="username">Username</label>
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">@</span>
-                </div>
+            <div>
+              <label
+                htmlFor="username"
+                className="block text-slate-700 font-semibold mb-1"
+              >
+                Username
+              </label>
+              <div className="flex items-center">
+                <span className="px-3 py-2 bg-slate-100 border border-slate-200 rounded-l-lg text-slate-500">
+                  @
+                </span>
                 <input
                   type="text"
-                  className="form-control"
                   id="username"
-                  placeholder="Username"
-                  required=""
+                  className="w-full px-4 py-2 rounded-r-lg border-t border-b border-r border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback" style={{ width: "100%" }}>
-                  Your username is required.
-                </div>
               </div>
             </div>
-
-            <div className="mb-3">
-              <label for="email">
-                Email <span className="text-muted">(Optional)</span>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-slate-700 font-semibold mb-1"
+              >
+                Email{" "}
+                <span className="text-slate-400 font-normal">(Optional)</span>
               </label>
               <input
                 type="email"
-                className="form-control"
                 id="email"
+                className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
                 placeholder="you@example.com"
               />
-              <div className="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
             </div>
-
-            <div className="mb-3">
-              <label for="address">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                placeholder="1234 Main St"
-                required=""
-              />
-              <div className="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-            </div>
-
-            <div className="mb-3">
-              <label for="address2">
-                Address 2 <span className="text-muted">(Optional)</span>
+            <div>
+              <label
+                htmlFor="address"
+                className="block text-slate-700 font-semibold mb-1"
+              >
+                Address
               </label>
               <input
                 type="text"
-                className="form-control"
+                id="address"
+                className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                placeholder="1234 Main St"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="address2"
+                className="block text-slate-700 font-semibold mb-1"
+              >
+                Address 2{" "}
+                <span className="text-slate-400 font-normal">(Optional)</span>
+              </label>
+              <input
+                type="text"
                 id="address2"
+                className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
                 placeholder="Apartment or suite"
               />
             </div>
-
-            <div className="row">
-              <div className="col-md-5 mb-3">
-                <label for="country">Country</label>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <label
+                  htmlFor="country"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  Country
+                </label>
                 <select
-                  className="custom-select d-block w-100"
                   id="country"
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 >
                   <option value="">Choose...</option>
                   <option>United States</option>
                 </select>
-                <div className="invalid-feedback">
-                  Please select a valid country.
-                </div>
               </div>
-              <div className="col-md-4 mb-3">
-                <label for="state">State</label>
+              <div className="flex-1">
+                <label
+                  htmlFor="state"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  State
+                </label>
                 <select
-                  className="custom-select d-block w-100"
                   id="state"
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 >
                   <option value="">Choose...</option>
                   <option>California</option>
                 </select>
-                <div className="invalid-feedback">
-                  Please provide a valid state.
-                </div>
               </div>
-              <div className="col-md-3 mb-3">
-                <label for="zip">Zip</label>
+              <div className="flex-1">
+                <label
+                  htmlFor="zip"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  Zip
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="zip"
-                  placeholder=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback">Zip code required.</div>
               </div>
             </div>
-            <hr className="mb-4" />
-            <div className="custom-control custom-checkbox">
+            <div className="flex items-center gap-4">
               <input
                 type="checkbox"
-                className="custom-control-input"
                 id="same-address"
+                className="accent-yellow-400 w-5 h-5 rounded"
               />
-              <label className="custom-control-label" for="same-address">
+              <label htmlFor="same-address" className="text-slate-700">
                 Shipping address is the same as my billing address
               </label>
             </div>
-            <div className="custom-control custom-checkbox">
+            <div className="flex items-center gap-4">
               <input
                 type="checkbox"
-                className="custom-control-input"
                 id="save-info"
+                className="accent-yellow-400 w-5 h-5 rounded"
               />
-              <label className="custom-control-label" for="save-info">
+              <label htmlFor="save-info" className="text-slate-700">
                 Save this information for next time
               </label>
             </div>
-            <hr className="mb-4" />
-
-            <h4 className="mb-3">Payment</h4>
-
-            <div className="d-block my-3">
-              <div className="custom-control custom-radio">
+            <h3 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
+              Payment
+            </h3>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1 flex items-center gap-2">
                 <input
+                  type="radio"
                   id="credit"
                   name="paymentMethod"
-                  type="radio"
-                  className="custom-control-input"
-                  checked=""
-                  required=""
+                  className="accent-yellow-400 w-5 h-5"
+                  required
                 />
-                <label className="custom-control-label" for="credit">
+                <label htmlFor="credit" className="text-slate-700">
                   Credit card
                 </label>
               </div>
-              <div className="custom-control custom-radio">
+              <div className="flex-1 flex items-center gap-2">
                 <input
+                  type="radio"
                   id="debit"
                   name="paymentMethod"
-                  type="radio"
-                  className="custom-control-input"
-                  required=""
+                  className="accent-yellow-400 w-5 h-5"
+                  required
                 />
-                <label className="custom-control-label" for="debit">
+                <label htmlFor="debit" className="text-slate-700">
                   Debit card
                 </label>
               </div>
-              <div className="custom-control custom-radio">
+              <div className="flex-1 flex items-center gap-2">
                 <input
+                  type="radio"
                   id="paypal"
                   name="paymentMethod"
-                  type="radio"
-                  className="custom-control-input"
-                  required=""
+                  className="accent-yellow-400 w-5 h-5"
+                  required
                 />
-                <label className="custom-control-label" for="paypal">
+                <label htmlFor="paypal" className="text-slate-700">
                   PayPal
                 </label>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label for="cc-name">Name on card</label>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <label
+                  htmlFor="cc-name"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  Name on card
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="cc-name"
-                  placeholder=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <small className="text-muted">
+                <small className="text-slate-400">
                   Full name as displayed on card
                 </small>
-                <div className="invalid-feedback">Name on card is required</div>
               </div>
-              <div className="col-md-6 mb-3">
-                <label for="cc-number">Credit card number</label>
+              <div className="flex-1">
+                <label
+                  htmlFor="cc-number"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  Credit card number
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="cc-number"
-                  placeholder=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback">
-                  Credit card number is required
-                </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-3 mb-3">
-                <label for="cc-expiration">Expiration</label>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <label
+                  htmlFor="cc-expiration"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  Expiration
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="cc-expiration"
-                  placeholder=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback">Expiration date required</div>
               </div>
-              <div className="col-md-3 mb-3">
-                <label for="cc-cvv">CVV</label>
+              <div className="flex-1">
+                <label
+                  htmlFor="cc-cvv"
+                  className="block text-slate-700 font-semibold mb-1"
+                >
+                  CVV
+                </label>
                 <input
                   type="text"
-                  className="form-control"
                   id="cc-cvv"
-                  placeholder=""
-                  required=""
+                  className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-yellow-400 outline-none"
+                  required
                 />
-                <div className="invalid-feedback">Security code required</div>
               </div>
             </div>
-            <hr className="mb-4" />
-            <button className="btn btn-primary btn-lg btn-block" type="submit">
+            <button
+              type="submit"
+              className="w-full mt-8 px-8 py-4 rounded-2xl bg-yellow-400 text-slate-900 font-extrabold text-lg shadow-lg border-2 border-yellow-400 hover:bg-yellow-300 hover:text-slate-900 transition"
+            >
               Continue to checkout
             </button>
           </form>

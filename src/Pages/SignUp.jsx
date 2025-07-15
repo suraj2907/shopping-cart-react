@@ -114,7 +114,7 @@ const SignUp = () => {
         <img
           src={signup}
           alt="Sign up visual"
-          className="rounded-3xl w-[500px] max-h-[500px] h-auto object-cover"
+          className="rounded-3xl w-full max-w-xs max-h-[500px] h-auto object-cover"
         />
       </div>
     </div>

@@ -94,7 +94,7 @@ const NavBar = () => {
       </div>
       {/* Mobile Dropdown: only visible on mobile when toggled */}
       {toggle && (
-        <div className="absolute top-16 right-4 bg-black rounded-xl shadow-lg flex flex-col items-start gap-2 p-4 z-50 md:hidden min-w-[150px]">
+        <div className="absolute top-16 right-0 bg-black rounded-xl shadow-lg flex flex-col items-start gap-2 p-4 z-50 md:hidden w-full min-w-[150px]">
           {context.user ? (
             <button
               onClick={() => {
@@ -110,7 +110,7 @@ const NavBar = () => {
               {!isSignIn && (
                 <Link
                   to="/signin"
-                  className="w-full bg-slate-900 text-yellow-400 px-4 py-2 rounded-lg font-semibold hover:bg-blue-100 transition"
+                  className="w-full bg-slate-900 text-yellow-400 px-6 py-4 rounded-lg font-semibold hover:bg-blue-100 transition text-lg"
                   onClick={() => setToggle(false)}
                 >
                   SignIn
@@ -119,7 +119,7 @@ const NavBar = () => {
               {!isSignUp && (
                 <Link
                   to="/signup"
-                  className="w-full bg-slate-900 text-yellow-400 px-4 py-2 rounded-lg font-semibold hover:bg-blue-100 transition"
+                  className="w-full bg-slate-900 text-yellow-400 px-6 py-4 rounded-lg font-semibold hover:bg-blue-100 transition text-lg"
                   onClick={() => setToggle(false)}
                 >
                   SignUp

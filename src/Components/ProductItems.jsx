@@ -103,12 +103,12 @@ const ProductItems = () => {
             <NavLink
               key={item.id}
               to={`/ProductDetails/${item.id}`}
-              className="bg-white rounded-2xl shadow-lg flex flex-col justify-between items-center p-5 w-72 min-h-[430px] hover:shadow-2xl transition-shadow duration-200 cursor-pointer group"
+              className="bg-white rounded-2xl shadow-lg flex flex-col justify-between items-center p-5 w-full sm:w-72 min-h-[430px] hover:shadow-2xl transition-shadow duration-200 cursor-pointer group"
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="h-48 w-48 object-contain mb-4 rounded-xl bg-gray-50 group-hover:scale-105 transition-transform duration-200"
+                className="h-48 w-48 mx-auto object-contain mb-4 rounded-xl bg-gray-50 group-hover:scale-105 transition-transform duration-200"
               />
               <h5 className="font-bold text-lg text-center mb-2 line-clamp-2">
                 {item.title}

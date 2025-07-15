@@ -109,20 +109,3 @@
     flex: 0 0 50%;
   }
 }
-
-@media only screen and (min-width: 400px) and (max-width: 766px) {
-  .signin-container {
-    display: flex;
-    justify-content: center;
-    width: auto;
-    gap: 10px;
-    flex: 0 0 50%;
-    height: 90vh;
-  }
-  .login-mobile {
-    flex: 0 0 80%;
-  }
-  img {
-    display: none;
-  }
-}
