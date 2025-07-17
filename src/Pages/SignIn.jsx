@@ -118,7 +118,7 @@ const SignIn = () => {
         </div>
       </div>
       {/* Right: Dummy Image */}
-      <div className="flex-1 flex items-center justify-center mt-8 md:mt-0">
+      <div className="hidden flex-1 md:flex items-center justify-center mt-8 md:mt-0">
         <img
           src={signup}
           alt="Dummy"

@@ -110,11 +110,11 @@ const SignUp = () => {
         </div>
       </div>
       {/* Right: Image */}
-      <div className="flex-1 flex items-center justify-center mt-8 md:mt-0">
+      <div className="hidden flex-1 md:flex items-center justify-center mt-8 md:mt-0">
         <img
           src={signup}
           alt="Sign up visual"
-          className="rounded-3xl w-full max-w-xs max-h-[500px] h-auto object-cover"
+          className="rounded-3xl w-full max-w-xs max-h-[500px] h-full  object-cover"
         />
       </div>
     </div>
