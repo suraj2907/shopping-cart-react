@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./Context/UserContext";
@@ -45,7 +45,7 @@ const App = () => {
       <ToastProvider>
         <UserContext.Provider value={{ user, setUser }}>
           <NavBar />
-          <div >
+          <div>
             {" "}
             {/* Add padding for fixed navbar */}
             <Routes>

@@ -11,6 +11,7 @@ const SignUp = () => {
   const context = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
 
@@ -29,6 +30,10 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast("Passwords do not match", "error");
+      return;
+    }
     handleSignUp();
   };
 
@@ -89,6 +94,22 @@ const SignUp = () => {
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
+              </div>
+            </div>
+            <div className="w-full">
+              <label className="block text-gray-700 font-semibold text-base mb-2">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 shadow-sm outline-none pr-20"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  autoComplete="new-password"
+                />
               </div>
             </div>
             <button

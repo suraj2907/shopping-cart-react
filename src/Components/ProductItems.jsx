@@ -39,65 +39,6 @@ const ProductItems = () => {
         : products.filter((item) => item.category === filter);
     return (
       <>
-        {" "}
-        {/* Sort By Price */}
-        <div className="flex flex-col items-center mb-2 gap-2">
-          <h1 className="text-center text-xl font-semibold mb-2">
-            Sort By Price -&gt;{" "}
-          </h1>
-          <div className="flex flex-wrap justify-center gap-2">
-            <button
-              className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow"
-              onClick={() => sortProduct("price-asc")}
-            >
-              Ascending Price
-            </button>
-            <button
-              className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow"
-              onClick={() => sortProduct("price-desc")}
-            >
-              Descending Price
-            </button>
-          </div>
-        </div>
-        {/* Sort By Categories */}
-        <div className="flex flex-col items-center gap-2 mb-4">
-          <h4 className="text-center text-xl font-semibold mb-2">
-            Sort By Categories -&gt;{" "}
-          </h4>
-          <div className="flex flex-wrap justify-center gap-2">
-            <button
-              className="w-auto py-2 px-4 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow"
-              onClick={() => setFilter("ALL")}
-            >
-              ALL
-            </button>
-            <button
-              className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
-              onClick={() => setFilter("men's clothing")}
-            >
-              Mens's Clothing
-            </button>
-            <button
-              className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
-              onClick={() => setFilter("women's clothing")}
-            >
-              Women's Clothing
-            </button>
-            <button
-              className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
-              onClick={() => setFilter("jewelery")}
-            >
-              Jewelery
-            </button>
-            <button
-              className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
-              onClick={() => setFilter("electronics")}
-            >
-              Electronics
-            </button>
-          </div>
-        </div>
         <div className="flex flex-wrap gap-8 justify-center">
           {filteredProducts.map((item) => (
             <NavLink
@@ -131,37 +72,101 @@ const ProductItems = () => {
 
   return (
     <>
-      <div>
+      <div className="mt-12">
         <div>
           <div className="row">
             <div className="col-12  mb-5">
-              <h1 className="display-6 overflow-hidden fw-bolder text-center">
+              <h1 className="display-6 overflow-hidden text-2xl font-extrabold text-center">
                 Latest Products
               </h1>
               <hr />
             </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 overflow-hidden ">
-            {isLoading ? (
-              <>
-                {[...Array(4)].map((_, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col items-center gap-2 w-[300px]"
+          {/* Main flex container for sidebar and products */}
+          <div className="flex flex-col md:flex-row gap-6 overflow-hidden">
+            {/* Sidebar: Filters */}
+            <aside className="w-full md:w-64 flex-shrink-0 mb-4 md:mb-0">
+              {/* Sort By Price */}
+              <div className="flex flex-col items-center mb-6 gap-2 bg-white rounded-2xl shadow p-4">
+                <h1 className="text-center text-xl font-semibold mb-2">
+                  Sort By Price -&gt;{" "}
+                </h1>
+                <div className="flex flex-wrap justify-center gap-2">
+                  <button
+                    className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow"
+                    onClick={() => sortProduct("price-asc")}
                   >
-                    <div className="animate-pulse bg-gray-300 h-[250px] w-[250px] rounded mb-2"></div>
-                    <div className="animate-pulse bg-gray-300 h-[50px] w-[150px] rounded mb-2"></div>
-                    <div className="animate-pulse bg-gray-300 h-[75px] w-[200px] rounded mb-2"></div>
-                    <div className="animate-pulse bg-gray-300 h-[50px] w-[50px] rounded mb-2"></div>
-                    <div className="animate-pulse bg-gray-300 h-[35px] w-[50px] rounded"></div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <ShowProducts />
-            )}
+                    Ascending Price
+                  </button>
+                  <button
+                    className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow"
+                    onClick={() => sortProduct("price-desc")}
+                  >
+                    Descending Price
+                  </button>
+                </div>
+              </div>
+              {/* Sort By Categories */}
+              <div className="flex flex-col items-center gap-2 bg-white rounded-2xl shadow p-4">
+                <h4 className="text-center text-xl font-semibold mb-2">
+                  Sort By Categories -&gt;{" "}
+                </h4>
+                <div className="flex flex-wrap justify-center gap-2">
+                  <button
+                    className="w-auto py-2 px-4 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow"
+                    onClick={() => setFilter("ALL")}
+                  >
+                    ALL
+                  </button>
+                  <button
+                    className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
+                    onClick={() => setFilter("men's clothing")}
+                  >
+                    Mens's Clothing
+                  </button>
+                  <button
+                    className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
+                    onClick={() => setFilter("women's clothing")}
+                  >
+                    Women's Clothing
+                  </button>
+                  <button
+                    className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
+                    onClick={() => setFilter("jewelery")}
+                  >
+                    Jewelery
+                  </button>
+                  <button
+                    className="px-4 py-2 rounded-xl bg-yellow-400 text-slate-900 hover:bg-yellow-300 font-semibold text-center transition-all duration-200 shadow "
+                    onClick={() => setFilter("electronics")}
+                  >
+                    Electronics
+                  </button>
+                </div>
+              </div>
+            </aside>
+            {/* Main Content: Products */}
+            <main className="flex-1">
+              {isLoading ? (
+                <div className="flex flex-wrap gap-8 justify-center">
+                  {[...Array(4)].map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="flex flex-col items-center gap-2 w-[300px]"
+                    >
+                      <div className="animate-pulse bg-gray-300 h-[250px] w-[250px] rounded mb-2"></div>
+                      <div className="animate-pulse bg-gray-300 h-[50px] w-[150px] rounded mb-2"></div>
+                      <div className="animate-pulse bg-gray-300 h-[75px] w-[200px] rounded mb-2"></div>
+                      <div className="animate-pulse bg-gray-300 h-[50px] w-[50px] rounded mb-2"></div>
+                      <div className="animate-pulse bg-gray-300 h-[35px] w-[50px] rounded"></div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <ShowProducts />
+              )}
+            </main>
           </div>
-
           {isLoading ? "" : <Footer />}
         </div>
       </div>

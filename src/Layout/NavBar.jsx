@@ -95,7 +95,12 @@ const NavBar = () => {
       {/* Mobile Dropdown: only visible on mobile when toggled */}
       {toggle && (
         <div className="absolute top-16 right-0 bg-black rounded-xl shadow-lg flex flex-col items-start gap-2 p-4 z-50 md:hidden w-full min-w-[150px]">
-          {context.user ? (
+          {context.user?.email && (
+            <span className="block                                                                                                                                                          w-full bg-slate-900 text-yellow-400 px-4 py-2 rounded-lg font-semibold hover:bg-blue-100 transition text-left">
+              {context.user.email}
+            </span>
+          )}
+          {context.user ? (                                                                                                                                               
             <button
               onClick={() => {
                 handleLogOut();
