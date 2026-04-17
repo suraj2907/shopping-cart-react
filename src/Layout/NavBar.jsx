@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { UserContext } from "../Context/UserContext";
+import { UserContext } from "../context/UserContext";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import firebase from "firebase/compat/app";
@@ -15,7 +15,7 @@ const NavBar = () => {
   const isSignUp = location.pathname.toLowerCase().includes("signup");
 
   // Debug: log user context
-  // console.log("NavBar context.user:", context.user);
+  // 
 
   const handleToggle = () => setToggle(!toggle);
 
@@ -23,12 +23,8 @@ const NavBar = () => {
     firebase
       .auth()
       .signOut()
-      .then(() => {
-        context.setUser(null);
-        localStorage.clear();
-      })
       .catch((error) => {
-        console.log(error);
+        console.error("Logout error:", error);
       });
   };
 

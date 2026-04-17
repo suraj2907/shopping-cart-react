@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../index.css";
-import signup from "../Assests/signup.png";
+import signup from "../assets/signup.png";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { UserContext } from "../Context/UserContext";
+import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
-import { useToast } from "../Components/Toast";
+import { useToast } from "../components/Toast";
 // Removed unused import { div } from "framer-motion/client";
 
 const SignIn = () => {
@@ -19,16 +19,7 @@ const SignIn = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        // Do not set context here; App.jsx will handle it via onAuthStateChanged
-        window.localStorage.setItem(
-          "userData",
-          JSON.stringify({ email: res.user.email, uid: res.user.uid })
-        );
-        window.localStorage.setItem("isloggedin", true);
-      })
       .catch((error) => {
-        console.log(error);
         showToast(error.message, "error");
       });
   };
@@ -39,13 +30,8 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    const isLoggedIn = window.localStorage.getItem("isloggedin");
-    if (isLoggedIn) {
-      // If there's a logged-in user, update the user context
-      const userData = JSON.parse(window.localStorage.getItem("userData"));
-      // context.setUser(userData); // No need to set context here, App.jsx handles it
-    }
-  }, [context]);
+    // Auth state is handled centrally in App.jsx
+  }, []);
 
   const handleShowPasswordToggle = () => {
     setShowPassword((prevShowPassoword) => !prevShowPassoword);

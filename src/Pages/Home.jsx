@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { UserContext } from "../Context/UserContext";
+import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
-import ProductItems from "../Components/ProductItems";
+import ProductItems from "../components/ProductItems";
 
 const Home = () => {
   const Context = useContext(UserContext);

@@ -1,18 +1,19 @@
 import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { UserContext } from "./Context/UserContext";
+import { UserContext } from "./context/UserContext";
 import { useState, useEffect } from "react";
-import SignIn from "./Pages/SignIn";
-import SignUp from "./Pages/SignUp";
-import Home from "./Pages/Home";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
 import firebase from "firebase/compat/app";
-import FireBaseConfig from "./FireBaseConfig/FireBaseConfig";
-import NavBar from "./Layout/NavBar";
-import MyCart from "./Pages/MyCart";
-import ProductDetails from "./Pages/ProductDetails";
-import Checkout from "./Pages/Checkout";
-import { ToastProvider } from "./Components/Toast";
+import FireBaseConfig from "./firebase/FireBaseConfig";
+import NavBar from "./layout/NavBar";
+import MyCart from "./pages/MyCart";
+import ProductDetails from "./pages/ProductDetails";
+import Checkout from "./pages/Checkout";
+import NotFound from "./pages/NotFound";
+import { ToastProvider } from "./components/Toast";
 
 firebase.initializeApp(FireBaseConfig);
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
               />
               <Route exact path="/MyCart" element={<MyCart />} />
               <Route exact path="/checkout" element={<Checkout />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </UserContext.Provider>

@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { UserContext } from "../Context/UserContext";
+import { UserContext } from "../context/UserContext";
 import { Link, NavLink, Navigate } from "react-router-dom";
 // import { toast } from "react-toastify";
-import { useToast } from "../Components/Toast";
-import signup from "../Assests/signin.png";
+import { useToast } from "../components/Toast";
+import signupImg from "../assets/signup.png";
 
 const SignUp = () => {
   const context = useContext(UserContext);
@@ -133,7 +133,7 @@ const SignUp = () => {
       {/* Right: Image */}
       <div className="hidden flex-1 md:flex items-center justify-center mt-8 md:mt-0">
         <img
-          src={signup}
+          src={signupImg}
           alt="Sign up visual"
           className="rounded-3xl w-full max-w-xs max-h-[500px] h-full  object-cover"
         />

@@ -15,10 +15,10 @@ const handleCart = (state = cart, action) => {
       );
 
       if (existingProductIndex !== -1) {
-        // If the product already exists in the cart, increment its quantity
-        const updatedCart = [...state];
-        updatedCart[existingProductIndex].qty += 1;
-        return updatedCart;
+        // If the product already exists in the cart, increment its quantity immutably
+        return state.map((item, index) =>
+          index === existingProductIndex ? { ...item, qty: item.qty + 1 } : item
+        );
       } else {
         return [
           ...state,
@@ -37,26 +37,19 @@ const handleCart = (state = cart, action) => {
 
       if (existingProductToRemove.qty === 1) {
         // Remove the item from the cart if qty is 1
-        const updatedCart = state.filter(
-          (item) => item.id !== product.id || item.qty > 1
-        );
-        localStorage.setItem("CartItems", JSON.stringify(updatedCart));
-        return updatedCart;
+        return state.filter((item) => item.id !== product.id);
       } else {
         // Decrement the quantity when qty is greater than 1
-        const updatedCart = state.map((item) =>
+        return state.map((item) =>
           item.id === product.id ? { ...item, qty: item.qty - 1 } : item
         );
-        localStorage.setItem("CartItems", JSON.stringify(updatedCart));
-        return updatedCart;
       }
 
     case UPDATE_CART_FROM_CACHE:
-      const cartItems = action.payload.map((item) => ({
+      return action.payload.map((item) => ({
         ...item,
         qty: item.qty,
       }));
-      return cartItems;
 
     default:
       return state;

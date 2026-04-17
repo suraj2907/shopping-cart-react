@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Footer from "../Layout/Footer";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/action/action";
+import useProducts from "../hooks/useProducts";
+import Footer from "../layout/Footer";
+import { useToast } from "./Toast";
 
 const ProductItems = () => {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts, isLoading, error } = useProducts();
   const [filter, setFilter] = useState("ALL");
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get(`https://fakestoreapi.com/products`);
-
-      console.log(data);
-      setProducts(data);
-
-      setIsLoading(false);
-    };
-
-    fetchProducts();
-  }, []);
+  const dispatch = useDispatch();
+  const showToast = useToast();
 
   const sortProduct = (order) => {
     const sorted = [...products];
@@ -60,9 +50,17 @@ const ProductItems = () => {
               <p className="text-blue-700 font-bold text-xl mt-auto mb-2">
                 ${item.price}
               </p>
-              <span className="w-full py-2 rounded-xl bg-yellow-400 text-slate-900 font-semibold text-center transition-all duration-200 shadow group-hover:bg-yellow-300">
-                Buy Now
-              </span>
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  dispatch(addToCart(item));
+                  showToast("Added to Cart Successfully!", "success");
+                }}
+                className="w-full py-2 rounded-xl bg-yellow-400 text-slate-900 font-semibold text-center transition-all duration-200 shadow hover:bg-yellow-300 z-10 relative"
+              >
+                Add to Cart
+              </button>
             </NavLink>
           ))}
         </div>
@@ -161,6 +159,17 @@ const ProductItems = () => {
                       <div className="animate-pulse bg-gray-300 h-[35px] w-[50px] rounded"></div>
                     </div>
                   ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-10">
+                  <h2 className="text-2xl font-bold text-red-600 mb-4">Error!</h2>
+                  <p className="text-gray-700">{error}</p>
+                  <button 
+                    onClick={() => window.location.reload()}
+                    className="mt-4 px-6 py-2 bg-yellow-400 rounded-xl font-bold hover:bg-yellow-300"
+                  >
+                    Retry
+                  </button>
                 </div>
               ) : (
                 <ShowProducts />

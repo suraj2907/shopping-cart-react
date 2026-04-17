@@ -8,9 +8,20 @@ const rootReducer = combineReducers({
   handleCart,
 });
 
-const thunkMiddleware = thunk.default ? thunk.default : thunk;
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// Load initial state from localStorage
+const persistedCart = localStorage.getItem("CartItems")
+  ? JSON.parse(localStorage.getItem("CartItems"))
+  : [];
 
-// Load initial cart items from local storage when the store is created
-// store.dispatch(loadCartFromLocalStorage());
+const preloadedState = {
+  handleCart: persistedCart,
+};
+
+const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
+
+// Subscribe to store changes to save cart to localStorage
+store.subscribe(() => {
+  localStorage.setItem("CartItems", JSON.stringify(store.getState().handleCart));
+});
+
 export default store;

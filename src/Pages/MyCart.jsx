@@ -4,7 +4,7 @@ import {
   addToCart,
   removeFromCart,
   updateCartItemsFromCache,
-} from "../Redux/action/action";
+} from "../redux/action/action";
 import { NavLink } from "react-router-dom";
 import { FaPlus, FaMinus, FaTimes } from "react-icons/fa";
 
@@ -12,88 +12,16 @@ const MyCart = () => {
   const cartItem = useSelector((state) => state.handleCart);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const cartItemJSON = localStorage.getItem("CartItems");
-    if (cartItemJSON) {
-      const cartItems = JSON.parse(cartItemJSON);
-      dispatch(updateCartItemsFromCache(cartItems));
-    }
-  }, [dispatch]);
-
   const handleIncrement = (item) => {
-    // Dispatch the addToCart action to increment quantity in Redux store
     dispatch(addToCart(item));
-
-    // Update the quantity in local storage
-    const existingCartItemsJSON = localStorage.getItem("CartItems");
-    const existingCartItems = existingCartItemsJSON
-      ? JSON.parse(existingCartItemsJSON)
-      : [];
-
-    const itemIndexToUpdate = existingCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (itemIndexToUpdate !== -1) {
-      existingCartItems[itemIndexToUpdate].qty++;
-      localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-    }
   };
 
   const handleDecrement = (item) => {
-    // Find the item in local storage
-    const existingCartItemsJSON = localStorage.getItem("CartItems");
-    const existingCartItems = existingCartItemsJSON
-      ? JSON.parse(existingCartItemsJSON)
-      : [];
-
-    const itemIndexToUpdate = existingCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (itemIndexToUpdate !== -1) {
-      if (existingCartItems[itemIndexToUpdate].qty > 1) {
-        // If the quantity is greater than 1, update Redux store and local storage
-        dispatch(removeFromCart(item));
-        existingCartItems[itemIndexToUpdate].qty--;
-
-        // Update local storage
-        localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-      } else {
-        // If the quantity is 1, remove the item from Redux store and local storage
-        dispatch(removeFromCart(item));
-
-        // Remove the item from local storage
-        existingCartItems.splice(itemIndexToUpdate, 1);
-        localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-      }
-    }
+    dispatch(removeFromCart(item));
   };
 
   const handleClose = (item) => {
     dispatch(removeFromCart(item));
-    // Remove the item from local storage as well
-    const existingCartItemsJSON = localStorage.getItem("CartItems");
-    const existingCartItems = existingCartItemsJSON
-      ? JSON.parse(existingCartItemsJSON)
-      : [];
-
-    // Find the index of the item to be removed in local storage
-    const itemIndexToRemove = existingCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (itemIndexToRemove !== -1) {
-      // Update the item quantity in local storage
-      if (existingCartItems[itemIndexToRemove].qty >= 1) {
-        existingCartItems[itemIndexToRemove].qty--;
-      } else {
-        // If the quantity is 1, remove the item from local storage
-        existingCartItems.splice(itemIndexToRemove, 1);
-      }
-
-      localStorage.setItem("CartItems", JSON.stringify(existingCartItems));
-    }
   };
 
   const cartItems = (item) => {
